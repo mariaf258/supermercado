@@ -1,13 +1,44 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import inicio from '@/views/inicio.vue'
+import supermercado_login from '@/views/supermercado_login.vue'
+import guardadosVacio from '@/views/guardadosVacio.vue'
+import guardados from '@/views/guardados.vue'
+import carritoVacio from '@/views/carritoVacio.vue'
+import carrito from '@/views/carrito.vue'
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: HomeView
+      name: 'inicio',
+      component: inicio
+    },    
+    {
+      path: '/supermercado_login',
+      name: 'supermercado_login',
+      component: supermercado_login
+    },
+    {
+      path: '/guardadosVacio',
+      name: 'guardadosVacio',
+      component: guardadosVacio
+    },
+    {
+      path: '/guardados',
+      name: 'guardados',
+      component: guardados
+    },  
+    {
+      path: '/carritoVacio',
+      name: 'carritoVacio',
+      component: carritoVacio
+    },
+    {
+      path: '/carrito',
+      name: 'carrito',
+      component: carrito
     },
     {
       path: '/about',
@@ -19,5 +50,34 @@ const router = createRouter({
     }
   ]
 })
+
+
+let conectado = false;
+
+router.beforeEach((to) => {
+
+  const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
+
+  if (isAuthenticated && to.path === '/supermercado_login') {
+    return { path: '/' };
+  }
+
+  if (!isAuthenticated && to.path !== '/supermercado_login') {
+    return { path: '/supermercado_login' };
+  }
+});
+
+function iniciarSesion() {
+  conectado = true;
+  localStorage.setItem('isAuthenticated', 'true');
+}
+
+function cerrarSesion() {
+  conectado = false;
+  localStorage.removeItem('isAuthenticated');
+}
+
+
+export { iniciarSesion, cerrarSesion }
 
 export default router

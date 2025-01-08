@@ -1,0 +1,47 @@
+.offcanvas-body {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    background-color: #f96616; /* Color naranja */
+    color: white;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 1000;
+  }
+  
+  .offcanvas-body.show-menu {
+    transform: translateX(0); /* Hace visible el menú */
+  }
+  
+  .navbar-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .navbar-nav li {
+    padding: 15px 0;
+    border-bottom: 1px solid white;
+    font-size: 18px;
+    font-family: 'Arial', sans-serif;
+    cursor: pointer;
+  }
+  
+  .navbar-nav li:hover {
+    color: #ffd700; /* Cambia el color al pasar el mouse */
+  }
+  
+  .menu {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 1100;
+  }
+  

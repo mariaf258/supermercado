@@ -1,0 +1,34 @@
+.header-1 {
+    width: 100%;
+    height: 50px;
+    background-color: #f96616;
+    display: flex;
+    justify-content: space-between;
+    place-items: center;
+    padding: 20px;
+}
+
+.header-1 img {
+    /* width: 100%; */
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f96616;
+}
+
+.header-1 h1 {
+    /* width: 100%; */
+    height: 30px;
+    color: white;
+    font-size: 18px;
+    margin-left: -80px;
+}
+
+.header-1 h1 b {
+    /* width: 100%; */
+    height: 30px;
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+}

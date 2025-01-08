@@ -1,0 +1,134 @@
+
+  .main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+    margin-top: -10px;
+    margin-bottom: -150px;
+  }
+  
+  .button-container {
+    position: relative;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    /* background-color: #f96616; */
+    /* border: 1px solid #f96616; */
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .expand-button {
+    /* position: relative;
+    background-color: #f96616;
+    border: none;
+    cursor: pointer; */
+    top: -200px;
+    left: 630px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    position: absolute;
+    display: flex;
+    align-items: center;
+  }
+  
+  /* .expand-button:hover {
+    width: 120px;
+    height: 30px;
+  } */
+  
+  .tooltip {
+    visibility: hidden;
+    background-color: #f96616;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px 35px 5px 5px;
+    position: absolute;
+    bottom: 140%;
+    left: -80%;
+    transform: translateX(-50%);
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.3s;
+    white-space: nowrap;
+    height: 30px;
+  }
+  
+  .expand-button:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  button img {
+    width: 30px;
+    height: 30px;
+    justify-content: end;
+    background-color: #f96616;
+    border: 1px solid #f96616;
+    border-radius: 5px;
+    position: relative;
+    z-index: 2;
+    top: -60px;
+  }
+  
+  .Ellipse {
+    max-width: 1000px;
+    width: 150px;
+    height: 150px;
+    margin-bottom: 1rem;
+    margin-top: -100px;
+  }
+  
+  .shopping-cart {
+    max-width: 1000px;
+    width: 100px;
+    height: 100px;
+    margin-top: -140px;
+    margin-bottom: 50px;
+  }
+  
+  .title h2 {
+    font-size: 1.5rem;
+    text-align: center;
+    position: relative;
+    color: black;
+    top: -260px;
+    left: 10px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  }
+  
+  /* .button {
+    text-align: left;
+    float: left;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+  } */
+  
+  .button a {
+    color: white;
+    background-color: #f96616;
+    border: 1px solid #f96616;
+    margin-top: 20px;
+    /* margin-right: 20px; */
+    cursor: pointer;
+    border-radius: 3px;
+    height: 35px;
+    width: 180px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 17px;
+    padding: 6px;
+  }
+  
+  .button a:hover {
+    background-color: white;
+    color: #f96616;
+    border: 1px solid #f96616;
+  }
