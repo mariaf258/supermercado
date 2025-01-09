@@ -5,6 +5,9 @@ import guardadosVacio from '@/views/guardadosVacio.vue'
 import guardados from '@/views/guardados.vue'
 import carritoVacio from '@/views/carritoVacio.vue'
 import carrito from '@/views/carrito.vue'
+import alimentos from '@/views/alimentos.vue'
+import aseoPersonal from '@/views/aseoPersonal.vue'
+import aseoHogar from '@/views/aseoHogar.vue'
 
 
 const router = createRouter({
@@ -39,6 +42,21 @@ const router = createRouter({
       path: '/carrito',
       name: 'carrito',
       component: carrito
+    },
+    {
+      path: '/alimentos',
+      name: 'alimentos',
+      component: alimentos
+    },
+    {
+      path: '/aseoPersonal',
+      name: 'aseoPersonal',
+      component: aseoPersonal
+    },
+    {
+      path: '/aseoHogar',
+      name: 'aseoHogar',
+      component: aseoHogar
     },
     {
       path: '/about',

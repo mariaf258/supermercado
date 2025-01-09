@@ -26,10 +26,16 @@ const logout = () => {
             src="../../public/user.png" 
             alt="userIcon-white" 
             @click="toggleUserDropdown"
-            class="userIcon" 
+            class="userIcon-1" 
         />
-        <ul v-show="isUserDropdownVisible" class="dropdown-menu">
-            <a class="dropdown-item" @click="logout">Cerrar Sesión</a>
+        <ul v-show="isUserDropdownVisible" class="dropdownMenu">
+            <img
+                src="../../public/user.png"
+                alt="user"
+                @click="toggleUserDropdown"
+                class="userIcon-2"
+            />
+            <li class="dropdownItem" @click="logout">Cerrar Sesión</li>
         </ul>
     </div>
 </template>

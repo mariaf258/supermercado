@@ -1,6 +1,10 @@
 <script setup lang="ts">
-import header from '@/components/header.vue'
-import footer from '@/components/footer.vue'
+import Header from '@/components/header.vue'
+import Footer from '@/components/footer.vue'
+
+import { useRouter } from 'vue-router';
+
+const router  = useRouter()
 </script>
 
 <template>
@@ -13,16 +17,16 @@ import footer from '@/components/footer.vue'
           <img src="../../public/img/security.png" alt="" />
         </header> -->
 
-        <header />
+        <Header/>
 
         <main class="main">
-          <img src="../../public/img/Ellipse.png" alt="" class="Ellipse" />
-          <img src="../../public/img/shopping-cart.png" alt="" class="shopping-cart" />
+          <img src="../../public/Ellipse.png" alt="" class="Ellipse" />
+          <img src="../../public/shopping-cart.png" alt="" class="shopping-cart" />
           <h2>Tu carrito está vacío</h2>
           <div class="button">
             <a
-              href="C:\Users\PC\Desktop\supermercado"
-              class="hover:border-blue-500 hover:border-solid hover:bg-white hover:text-blue-500 group w-full flex flex-col items-center justify-center rounded-md border-2 border-dashed border-slate-300 text-sm leading-6 text-slate-900 font-medium py-3"
+              @click="router.go(-1)"
+              class="shopping hover:border-blue-500 hover:border-solid hover:bg-white hover:text-blue-500 group w-full flex flex-col items-center justify-center rounded-md border-2 border-dashed border-slate-300 text-sm leading-6 text-slate-900 font-medium py-3"
             >
               Sigue comprando
             </a>
@@ -55,7 +59,7 @@ import footer from '@/components/footer.vue'
           </div>
         </footer> -->
 
-        <footer />
+        <Footer/>
 
       </div>
     </div>

@@ -6,30 +6,36 @@
     justify-content: center;
     height: 100vh;
     text-align: center;
-    margin-top: -10px;
-    margin-bottom: -150px;
+    margin: 0px;
+    /* margin-top: -10px;
+    margin-bottom: -150px; */
   }
   
   .Ellipse {
     max-width: 1000px;
     width: 150px;
     height: 150px;
-    margin-bottom: 1rem;
-    margin-top: -100px;
+    /* margin-bottom: 1rem;
+    margin-top: -100px; */
+    display: block;
+    margin: 0 auto;
   }
   
   .shopping-cart {
     max-width: 1000px;
     width: 130px;
     height: 130px;
-    margin-bottom: 30px;
-    margin-top: -150px;
+    /* margin-bottom: 30px;
+    margin-top: -150px; */
+    display: block;
+    margin: 0 auto;
   }
   
   .main h2 {
     font-size: 1.5rem;
     margin-bottom: 1.5rem;
     margin-left: 20px;
+    font-weight: bold;
   }
   
   /* .button {
@@ -38,9 +44,15 @@
     margin-top: 10px;
     display: flex;
     justify-content: center;
-  } */
+  } */ 
   
-  .button a {
+  .button {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .button .shopping {
     color: white;
     background-color: #f96616;
     border: 1px solid #f96616;
@@ -54,9 +66,10 @@
     text-decoration: none;
     font-size: 17px;
     padding: 6px;
+    margin-left: 10px;
   }
   
-  .button a:hover {
+  .button .shopping:hover {
     background-color: white;
     color: #f96616;
     border: 1px solid #f96616;

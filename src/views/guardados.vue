@@ -56,7 +56,7 @@ const router  = useRouter()
           </div>
         </footer> -->
 
-        <Footer />
+        <Footer/>
 
       </div>
     </div>

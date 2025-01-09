@@ -199,29 +199,6 @@ const card = ref([
 
         <nav class="navbar bg-body-tertiary fixed-top">
           <navToggle/>
-          <!-- <img
-            src="../../public/menu.png"
-            alt="menu"
-            @click="toggleMenuDropdown"
-            class="menu"
-          />
-          <div class="offcanvas-body">
-            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-              <ul v-show="isMenuDropdownVisible" class="dropdown-menu">
-                <img
-                  src="../../public/menu.png"
-                  alt="menu"
-                  @click="toggleMenuDropdown"
-                  class="menu"
-                />
-                <a class="dropdown-item" href="#">Alimentos</a>
-                <hr class="dropdown-divider" />
-                <a class="dropdown-item" href="#">Productos de Aseo Personal</a>
-                <hr class="dropdown-divider" />
-                <a class="dropdown-item" href="#">Productos de Aseo del Hogar</a>
-              </ul>
-            </ul>
-          </div> -->
           <div class="d-flex align-items-center justify-content-between py-2 px-3">
             <div class="search-container">
               <div class="search-box">
@@ -250,29 +227,12 @@ const card = ref([
                 <img src="../../public/add-cart.png" alt="add-cart" />
               </router-link>
             </a>
-            <!-- <a target="_blank">
-              <img src="../../public/user.png" alt="userIcon-white" class="userIcon" />
-              <div class="offcanvas-body">
-                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                  <ul v-show="isUserDropdownVisible" class="dropdown-menu">
-                    <img
-                      src="../../public/user.png"
-                      alt="user"
-                      @click="toggleUserDropdown"
-                      class="userIcon-white"
-                    />
-                    <a class="dropdown-item" href="#">Iniciar Sesión</a>
-                    <hr class="dropdown-divider" />
-                    <a class="dropdown-item" href="#">Cerrar Sesión</a>
-                  </ul>
-                </ul>
-              </div>
-            </a> -->
             <LogoutButton/>
           </div>
         </nav>
       </div>
 
+      
       <div class="row g-2">
         <div class="col">
           <div class="p-3">
@@ -326,5 +286,5 @@ const card = ref([
 </template>
 
 <style>
-@import '/src/assets/inicio.css'
+@import '/src/assets/alimentos.css'
 </style>

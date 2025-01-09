@@ -41,7 +41,7 @@
     justify-content: center;
   } */
   
-  .button a {
+  .button .add {
     color: white;
     background-color: #f96616;
     border: 1px solid #f96616;
@@ -57,7 +57,7 @@
     padding: 6px;
   }
   
-  .button a:hover {
+  .button .add:hover {
     background-color: white;
     color: #f96616;
     border: 1px solid #f96616;
