@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import LogoutButton from '@/components/logoutButton.vue'
-import navToggle from '@/components/navToggle.vue'
+import HeaderPrincipal from '@/components/headerPrincipal.vue'
+import FooterPrincipal from '@/components/footerPrincipal.vue'
 import { ref } from 'vue'
 
 let isMenuDropdownVisible = false
@@ -96,90 +96,6 @@ const card = ref([
     name: 'MAYONESA MAVESA',
     amount: '500gr',
     price: '25.500'
-  },
-  {
-    id: 13,
-    image: '../../public/jabon.png',
-    name: 'JABÓN DOVE',
-    amount: '3 Unidades',
-    price: '15.400'
-  },
-  {
-    id: 14,
-    image: '../../public/listerine.png',
-    name: 'LISTERINE',
-    amount: '500 ml',
-    price: '17.200'
-  },
-  {
-    id: 15,
-    image: '../../public/cepillo-de-dientes.png',
-    name: 'CEPILLO DE DIENTES',
-    amount: '1 Unidad',
-    price: '4.000'
-  },
-  {
-    id: 16,
-    image: '../../public/crema-colgate.png',
-    name: 'CREMA COLGATE',
-    amount: '75 ml',
-    price: '6.600'
-  },
-  {
-    id: 17,
-    image: '../../public/Papel-Higienico.png',
-    name: 'PAPEL HIGIENICO',
-    amount: '4 Rollos',
-    price: '9.600'
-  },
-  {
-    id: 18,
-    image: '../../public/shampoo.png',
-    name: 'SHAMPOO',
-    amount: '375 ml',
-    price: '25.650'
-  },
-  {
-    id: 19,
-    image: '../../public/balde.png',
-    name: 'BALDE',
-    amount: '1 Unidad',
-    price: '18.000'
-  },
-  {
-    id: 20,
-    image: '../../public/fab.png',
-    name: 'DETERGENTE FAB',
-    amount: '4kg',
-    price: '47.400'
-  },
-  {
-    id: 21,
-    image: '../../public/jabon-de-cocina.png',
-    name: 'LAVAPLATOS LIQUIDO',
-    amount: '400 ml',
-    price: '7.000'
-  },
-  {
-    id: 22,
-    image: '../../public/escoba.png',
-    name: 'ESCOBA',
-    amount: '1 Unidad',
-    price: '9.200'
-  },
-  {
-    id: 23,
-    image: '../../public/palo_de_escoba.png',
-    name: 'PALO DE ESCOBA',
-    amount: '1 Unidad',
-    price: '4.000'
-  },
-  {
-    id: 24,
-    image: '../../public/trapero.png',
-    name: 'TRAPERO',
-    amount: '1 Unidad',
-    price: '12.800'
   }
 ])
 </script>
@@ -187,51 +103,10 @@ const card = ref([
 <template>
   <div id="app">
     <div class="page-wrapper">
-      <div class="">
-        <header></header>
-        <div class="image-title align-items-center">
-          <img
-            src="../../public/Supermercado-title.png"
-            alt="supermercado xyz"
-            class="title-supermercado align-items-center"
-          />
-        </div>
+      
+      <HeaderPrincipal/>
 
-        <nav class="navbar bg-body-tertiary fixed-top">
-          <navToggle/>
-          <div class="d-flex align-items-center justify-content-between py-2 px-3">
-            <div class="search-container">
-              <div class="search-box">
-                
-                <input 
-                  @input="filtrarModulos" 
-                  type="text" 
-                  id="searchInput" 
-                  placeholder="Buscar..." 
-                />
-                <img src="../../public/search.png" alt="search" class="search-icon" />
-              </div>
-              <div id="results" class="results">
-                <ul>
-                </ul>
-              </div>
-            </div>
-
-            <a href="#" target="_blank">
-              <router-link to="/guardadosVacio">
-                <img src="../../public/bookmark-white.png" alt="bookmark" />
-              </router-link>
-            </a>
-            <a href="#" target="_blank">
-              <router-link to="/carritoVacio">
-                <img src="../../public/add-cart.png" alt="add-cart" />
-              </router-link>
-            </a>
-            <LogoutButton/>
-          </div>
-        </nav>
-      </div>
-
+    <p>Alimentos</p>
       
       <div class="row g-2">
         <div class="col">
@@ -258,33 +133,11 @@ const card = ref([
         </div>
       </div>
 
-      <footer class="footer-inicio">
-        <div class="footer-container align-items-center">
-          <img
-            src="../../public/logo-supermercado-xyz.png"
-            alt="logo-supermercado-xyz"
-            class="logo-supermercado"
-          />
-          <p>Todo lo que necesitas en un solo lugar</p>
-          <span class="separator"></span>
-          <div class="footer-right">
-            <img src="../../public/maps.png" alt="maps" class="maps" />
-            <p class="maps-inicio">
-              Av 13 #3-24 ***** - Cúcuta.<br />
-              Norte de Santander, Colombia.
-            </p>
-            <img src="../../publiC/call.png" alt="call" class="call" />
-            <p class="call-inicio">
-              Celular: ##########<br />
-              Telefono: ##########
-            </p>
-          </div>
-        </div>
-      </footer>
+      <FooterPrincipal/>
     </div>
   </div>
 </template>
 
 <style>
-@import '/src/assets/alimentos.css'
+@import '/src/assets/subCategorias.css'
 </style>

@@ -1,6 +1,6 @@
 <template>
     <footer class="footer-1">
-        <div class="footer-container align-items-center">
+        <div class="footer-container1 align-items-center">
             <img
                 src="../../public/Logo_Supermercado.png"
                 alt="logo-supermercado-xyz"
@@ -8,13 +8,13 @@
             />
             <p>Todo lo que necesitas en un solo lugar</p>
             <hr class="separator-v" />
-            <div class="footer-right">
-                <img src="../../public/map-color.png" alt="maps" class="maps" />
+            <div class="footer-right-v">
+                <img src="../../public/map-color.png" alt="maps" class="maps-v" />
                 <p class="footer-maps">
                     Av 13 #3-24 ***** - Cúcuta.<br />
                     Norte de Santander, Colombia.
                 </p>
-                <img src="../../public/call-color.png" alt="call" class="call" />
+                <img src="../../public/call-color.png" alt="call" class="call-v" />
                 <p class="footer-call">
                     Celular: ##########<br />
                     Telefono: ##########

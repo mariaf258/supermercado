@@ -1,33 +1,35 @@
-.footer-1 {
+
+.footer-inicio {
     width: 100%;
     height: 100%;
+    background-color: #f96616;
     justify-content: space-around;
     align-items: center;
     padding: 20px;
     border-radius: 0px 0px 10px 10px;
-    border: 1px solid #f96616;
+    color: white;
 }
 
-.footer-container1 {
+.footer-container {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding-bottom: 10px;
+    padding: 20px;
     margin-left: -70px;
 }
 
-.footer-right-v {
+.footer-right {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-.footer-right-v div {
+.footer-right div {
     display: flex;
     align-items: center;
 }
 
-.footer-right-v p {
+.footer-right p {
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -35,7 +37,7 @@
     justify-content: space-around;
 }
 
-.footer-right-v img {
+.footer-right img {
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -44,52 +46,55 @@
     margin-left: -130px;
 }
 
-.separator-v {
-    border-left: 1px solid #f96616;
+.separator {
+    border-left: 2px solid white;
     height: 170px;
     display: inline-block;
     margin-right: 20px;
 }
 
-.footer-1 p {
+.footer-inicio p {
     /* width: 100%; */
     height: 100%;
     left: 20px;
-    color: #f96616;
+    color: white;
     font-family: Georgia, 'Times New Roman', Times, serif;
     display: flex;
     margin-left: -90px;
     font-size: 17px;
 }
 
-.footer-1 img {
+.footer-inicio img {
     width: 230px;
     height: 150px;
     /* background-color: #f96616; */
-    /* margin-left: 20px;w */
+    margin-left: 20px;
     margin-top: 20px;
 }
 
-.footer-1 .maps {
+.footer-inicio .maps {
     width: 35px;
     height: 35px;
+    /* margin-left: 20px; */
 }
 
-p.footer-maps {
+p.maps-inicio {
     width: 300px;
     margin-right: -50px;
     margin-top: -50px;
     text-align: center;
+    color: white;
 }
 
-.footer-1 .call-v {
+.footer-inicio .call {
     width: 30px;
     height: 30px;
 }
 
-p.footer-call {
+p.call-inicio {
     width: 300px;
     margin-right: -250px;
     margin-top: -48px;
     text-align: center;
+    color: white;
 }

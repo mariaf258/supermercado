@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import LogoutButton from '@/components/logoutButton.vue'
-import navToggle from '@/components/navToggle.vue'
+// import LogoutButton from '@/components/logoutButton.vue'
+// import navToggle from '@/components/navToggle.vue'
+import HeaderPrincipal from '@/components/headerPrincipal.vue'
+import FooterPrincipal from '@/components/footerPrincipal.vue'
 import { ref } from 'vue'
 
 let isMenuDropdownVisible = false
@@ -187,91 +189,7 @@ const card = ref([
 <template>
   <div id="app">
     <div class="page-wrapper">
-      <div class="">
-        <header></header>
-        <div class="image-title align-items-center">
-          <img
-            src="../../public/Supermercado-title.png"
-            alt="supermercado xyz"
-            class="title-supermercado align-items-center"
-          />
-        </div>
-
-        <nav class="navbar bg-body-tertiary fixed-top">
-          <navToggle/>
-          <!-- <img
-            src="../../public/menu.png"
-            alt="menu"
-            @click="toggleMenuDropdown"
-            class="menu"
-          />
-          <div class="offcanvas-body">
-            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-              <ul v-show="isMenuDropdownVisible" class="dropdown-menu">
-                <img
-                  src="../../public/menu.png"
-                  alt="menu"
-                  @click="toggleMenuDropdown"
-                  class="menu"
-                />
-                <a class="dropdown-item" href="#">Alimentos</a>
-                <hr class="dropdown-divider" />
-                <a class="dropdown-item" href="#">Productos de Aseo Personal</a>
-                <hr class="dropdown-divider" />
-                <a class="dropdown-item" href="#">Productos de Aseo del Hogar</a>
-              </ul>
-            </ul>
-          </div> -->
-          <div class="d-flex align-items-center justify-content-between py-2 px-3">
-            <div class="search-container">
-              <div class="search-box">
-                
-                <input 
-                  @input="filtrarModulos" 
-                  type="text" 
-                  id="searchInput" 
-                  placeholder="Buscar..." 
-                />
-                <img src="../../public/search.png" alt="search" class="search-icon" />
-              </div>
-              <div id="results" class="results">
-                <ul>
-                </ul>
-              </div>
-            </div>
-
-            <a href="#" target="_blank">
-              <router-link to="/guardadosVacio">
-                <img src="../../public/bookmark-white.png" alt="bookmark" />
-              </router-link>
-            </a>
-            <a href="#" target="_blank">
-              <router-link to="/carritoVacio">
-                <img src="../../public/add-cart.png" alt="add-cart" />
-              </router-link>
-            </a>
-            <!-- <a target="_blank">
-              <img src="../../public/user.png" alt="userIcon-white" class="userIcon" />
-              <div class="offcanvas-body">
-                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                  <ul v-show="isUserDropdownVisible" class="dropdown-menu">
-                    <img
-                      src="../../public/user.png"
-                      alt="user"
-                      @click="toggleUserDropdown"
-                      class="userIcon-white"
-                    />
-                    <a class="dropdown-item" href="#">Iniciar Sesión</a>
-                    <hr class="dropdown-divider" />
-                    <a class="dropdown-item" href="#">Cerrar Sesión</a>
-                  </ul>
-                </ul>
-              </div>
-            </a> -->
-            <LogoutButton/>
-          </div>
-        </nav>
-      </div>
+      <HeaderPrincipal/>
 
       <div class="row g-2">
         <div class="col">
@@ -298,29 +216,7 @@ const card = ref([
         </div>
       </div>
 
-      <footer class="footer-inicio">
-        <div class="footer-container align-items-center">
-          <img
-            src="../../public/logo-supermercado-xyz.png"
-            alt="logo-supermercado-xyz"
-            class="logo-supermercado"
-          />
-          <p>Todo lo que necesitas en un solo lugar</p>
-          <span class="separator"></span>
-          <div class="footer-right">
-            <img src="../../public/maps.png" alt="maps" class="maps" />
-            <p class="maps-inicio">
-              Av 13 #3-24 ***** - Cúcuta.<br />
-              Norte de Santander, Colombia.
-            </p>
-            <img src="../../publiC/call.png" alt="call" class="call" />
-            <p class="call-inicio">
-              Celular: ##########<br />
-              Telefono: ##########
-            </p>
-          </div>
-        </div>
-      </footer>
+      <FooterPrincipal/>
     </div>
   </div>
 </template>
