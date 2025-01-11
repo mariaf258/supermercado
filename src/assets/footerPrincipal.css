@@ -1,97 +1,65 @@
 .footer-inicio {
-    width: 100%;
-    height: 100%;
-    justify-content: space-around;
-    align-items: center;
-    padding: 20px;
-    border-radius: 0px 0px 10px 10px;
-    border: 1px solid #f96616;
-    background-color: #f96616;
-  }
-  
-  .footer-container {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding-bottom: 10px;
-    margin-left: -70px;
-  }
-  
-  .footer-right {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  
-  .footer-right div {
-    display: flex;
-    align-items: center;
-  }
-  
-  .footer-right p {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    /* padding: 20px; */
-    justify-content: space-around;
-    color: white;
-  }
-  
-  .footer-right img {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    /* padding: 20px; */
-    justify-content: space-around;
-    margin-left: -130px;
-  }
-  
-  .separator {
-    border-left: 1px solid white;
-    height: 170px;
-    display: inline-block;
-    margin-right: 20px;
-  }
-  
-  .footer-inicio p {
-    /* width: 100%; */
-    height: 100%;
-    left: 20px;
-    color: white;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    display: flex;
-    margin-left: -90px;
-    font-size: 17px;
-  }
-  
-  .footer-inicio img {
+  width: 100%;
+  padding: 20px;
+  border-radius: 0px 0px 10px 10px;
+  border: 1px solid #f96616;
+  background-color: #f96616;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: white;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.logo-supermercado {
     width: 230px;
     height: 150px;
-    /* background-color: #f96616; */
-    margin-left: 20px;
-    margin-top: 20px;
-  }
-  
-  .footer-inicio .maps {
-    width: 35px;
-    height: 35px;
-  }
-  
-  p.maps {
-    width: 300px;
-    margin-right: -50px;
-    margin-top: -50px;
-    text-align: center;
-  }
-  
-  .footer-inicio .call {
-    width: 30px;
-    height: 30px;
-  }
-  
-  p.call {
-    width: 300px;
-    margin-right: -250px;
-    margin-top: -48px;
-    text-align: center;
-  }
+}
+
+.footer-inicio p {
+  margin: 0;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 17px;
+  text-align: center;
+}
+
+.separator {
+  border-left: 1px solid white;
+  height: 100px;
+  margin: 0 20px;
+}
+
+.footer-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.maps-container,
+.call-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.maps-container img,
+.call-container img {
+  width: 25px;
+  height: 25px;
+}
+
+.maps-inicio,
+.call-inicio {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
