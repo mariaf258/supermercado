@@ -142,5 +142,5 @@ const card = ref([
 </template>
 
 <style>
-@import '/src/assets/subCategorias.css'
+@import '/src/assets/footerPrincipal.css'
 </style>
