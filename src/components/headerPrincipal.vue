@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import LogoutButton from '@/components/logoutButton.vue'
 import navToggle from '@/components/navToggle.vue'
-import { filteredProductos } from '@/utils/buscador';
+import { filteredProductos, filtrarProductos } from '@/utils/buscador';
 import { cards } from '@/utils/productos';
-
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 
 // let isMenuDropdownVisible = false
 // let isUserDropdownVisible = false
@@ -17,20 +16,16 @@ import { ref } from 'vue'
 //     isUserDropdownVisible = !isUserDropdownVisible
 // }
 
-let MostrarProductos = ref<datosCards[]>([]);
+const inputValue = ref('');
 
-const filtrarProductos = (event: Event) => {
-    const input = (event.target as HTMLInputElement).value.toLowerCase(); 
-    console.log('Buscando productos con:', input);
-
-    filteredProductos.value = cards.value.filter(
-        (card) =>
-        card.name.toLowerCase().includes(input)
-    );
-
-    console.log('Resultados del filtro:', filteredProductos.value);
+const filtrar = (event: Event) => {
+    inputValue.value = (event.target as HTMLInputElement).value;
+    filtrarProductos(cards.value, inputValue.value);
 };
 
+onMounted(() => {
+    filteredProductos.value = [...cards.value];
+});
 </script>
 
 <template>
@@ -51,7 +46,7 @@ const filtrarProductos = (event: Event) => {
                 <div class="search-box">
                     
                     <input 
-                    @input="filtrarProductos" 
+                    @input="filtrar" 
                     type="text" 
                     id="searchInput" 
                     placeholder="Buscar..." 
@@ -60,6 +55,9 @@ const filtrarProductos = (event: Event) => {
                 </div>
                 <div id="results" class="results">
                     <ul>
+                        <li v-for="producto in filteredProductos" :key="producto.id">
+                            {{ producto.name }} - {{ producto.description }}
+                        </li>
                     </ul>
                 </div>
                 </div>

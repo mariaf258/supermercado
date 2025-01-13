@@ -95,13 +95,15 @@
   }
   
   .title-cart h2 {
-    font-size: 1.5rem;
+    /* font-size: 1.5rem; */
     text-align: center;
     position: relative;
-    /* color: black; */
+    color: #2C3E50;
+    font-size: 25px;
+    font-weight: bold;    
     top: -260px;
-    left: 10px;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    right: 35rem;
+    /* font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; */
   }
   
   /* .button {

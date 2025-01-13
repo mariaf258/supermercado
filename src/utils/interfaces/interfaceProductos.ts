@@ -1,9 +1,10 @@
 export interface datosCards {
-    id?: number
+    id?: string
     image?: string
     name?: string
     amount?: string
     price?: string
+    category?: string
 }
 
 export default class ProductosDefault implements datosCards {
@@ -12,4 +13,5 @@ export default class ProductosDefault implements datosCards {
     name?: "";
     amount?: "";
     price?: "";
+    category?: "";
 }

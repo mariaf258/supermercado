@@ -21,21 +21,7 @@
     cursor: pointer;
   }
   
-  .expand-button {
-    /* position: relative;
-    background-color: #f96616;
-    border: none;
-    cursor: pointer; */
-    top: -200px;
-    left: 630px;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 10px;
-    position: absolute;
-    display: flex;
-    align-items: center;
-  }
+
   
   /* .expand-button:hover {
     width: 120px;
@@ -70,11 +56,12 @@
     height: 30px;
     justify-content: end;
     background-color: #f96616;
-    border: 1px solid #f96616;
+    /* border: 1px solid #f96616; */
     border-radius: 5px;
     position: relative;
     z-index: 2;
-    top: -60px;
+    padding: 2px;
+    top: -30px;
   }
   
   .Ellipse {
@@ -94,13 +81,15 @@
   }
   
   .title-saved h2 {
-    font-size: 1.5rem;
+    /* font-size: 1.5rem; */
     text-align: center;
     position: relative;
-    /* color: black; */
+    color: #2C3E50;
+    font-size: 25px;
+    font-weight: bold;    
     top: -260px;
-    left: 10px;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    right: 30rem;
+    /* font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; */
   }
   
   /* .button {
@@ -132,3 +121,5 @@
     color: #f96616;
     border: 1px solid #f96616;
   }
+
+  

@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import Header from '@/components/header.vue'
 import Footer from '@/components/footer.vue'
-// import { productosGuardados } from '@/components/iconos.vue';
+import BuscadorSubVista from '@/components/buscador/buscador-subVista.vue'
+
 import { useRouter } from 'vue-router';
 
 const router  = useRouter()
+
+
 </script>
 
 <template>
@@ -17,17 +20,19 @@ const router  = useRouter()
         <main class="main">
           <div class="button-container">
             <button class="expand-button">
-              <img src="../../public/bookmark-white.png" alt="" @click="router.go(-1)"/>
-              <span class="tooltip">Sigue agregando</span>
+              <img src="../../public/back-white.png" alt="" @click="router.go(-1)"/>
+              <!-- <span class="tooltip">Sigue agregando</span> -->
             </button>
           </div>
 
           <div class="title-saved">
             <h2>Tus productos guardados</h2>
-            <li v-for="producto in productosGuardados" :key="producto.id">
+            <!-- <li v-for="producto in productosGuardados" :key="producto.id">
               {{ producto.name }}
-            </li>
+            </li> -->
           </div>
+
+          <BuscadorSubVista/>
         </main>
 
 
@@ -39,5 +44,5 @@ const router  = useRouter()
 </template>
 
 <style>
-@import '/src/assets/guardados.css'
+@import '/src/assests/guardados.css'
 </style>

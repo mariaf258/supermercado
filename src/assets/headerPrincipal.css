@@ -35,66 +35,65 @@ header {
     position: relative;
     width: 100%;
     max-width: 400px;
-  }
-  
-  .search-box {
+}
+
+.search-box {
     display: flex;
     align-items: center;
     /* border: 1px solid #ccc; */
     border-radius: 4px;
     padding: 2px;
     background-color: #fff;
-  }
-  
-  .search-icon {
+}
+
+.search-icon {
     /* width: 20px; */
     /* height: 20px; */
     /* margin-right: 8px; */
     cursor: pointer;
-  }
-  
-  #searchInput {
+}
+
+#searchInput {
     flex: 1;
     border: none;
     outline: none;
     font-size: 16px;
     margin-left: 10px;
     outline: none;
-  }
-  
-  #searchInput::placeholder {
-    color: #aaa;
-  }
+}
 
-  #searchInput::selection {
+#searchInput::placeholder {
+    color: #aaa;
+}
+
+#searchInput::selection {
     background: transparent; 
     color: inherit;
-  }
-  
-  .results {
+}
+
+.results {
     margin-top: 8px;
     background-color: #f9f9f9;
     border: 1px solid #ccc;
     border-radius: 4px;
     padding: 8px;
     display: none; /* Muestra los resultados dinámicamente */
-  }
-  
-  .results ul {
+}
+
+.results ul {
     list-style: none;
     padding: 0;
     margin: 0;
-  }
-  
-  .results ul li {
+}
+
+.results ul li {
     padding: 4px 8px;
     border-bottom: 1px solid #eee;
-  }
-  
-  .results ul li:last-child {
+}
+
+.results ul li:last-child {
     border-bottom: none;
-  }
-  
+}
 
 
 .menu {
