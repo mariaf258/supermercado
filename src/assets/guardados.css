@@ -65,7 +65,7 @@
     opacity: 1;
   }
   
-  button img {
+  .expand-button img {
     width: 30px;
     height: 30px;
     justify-content: end;
@@ -93,11 +93,11 @@
     margin-bottom: 50px;
   }
   
-  .title h2 {
+  .title-saved h2 {
     font-size: 1.5rem;
     text-align: center;
     position: relative;
-    color: black;
+    /* color: black; */
     top: -260px;
     left: 10px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;

@@ -4,6 +4,7 @@ import Footer from '@/components/footer.vue'
 import { useRouter } from 'vue-router';
 
 const router  = useRouter()
+
 </script>
 
 <template>
@@ -25,7 +26,7 @@ const router  = useRouter()
             </button>
           </div>
 
-          <div class="title">
+          <div class="title-cart">
             <h2>Tus compras</h2>
           </div>
         </main>

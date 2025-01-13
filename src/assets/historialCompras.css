@@ -1,0 +1,28 @@
+.title-4 {
+    color: #2C3E50;
+    font-size: 25px;
+    font-weight: bold;
+    margin-left: 45px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.option {
+    grid-template-columns: repeat(2, 1fr);
+    display: grid;
+    margin-left: 45px;
+}
+
+.fecha {
+    color: #2C3E50;
+    font-size: 18px;
+
+
+}
+
+.n-compra {
+    color: #2C3E50;
+    font-size: 18px;
+
+}
+

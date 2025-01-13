@@ -8,7 +8,7 @@ interface datosCards {
         price: string;
 }
 
-export const card = ref<datosCards[]>([
+export const cards = ref<datosCards[]>([
     {
         id: 10,
         image: '../../public/aceite-de-oliva.png',

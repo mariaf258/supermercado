@@ -1,19 +1,36 @@
 <script setup lang="ts">
 import LogoutButton from '@/components/logoutButton.vue'
 import navToggle from '@/components/navToggle.vue'
+import { filteredProductos } from '@/utils/buscador';
+import { cards } from '@/utils/productos';
 
 import { ref } from 'vue'
 
-let isMenuDropdownVisible = false
-let isUserDropdownVisible = false
+// let isMenuDropdownVisible = false
+// let isUserDropdownVisible = false
 
-function toggleMenuDropdown() {
-    isMenuDropdownVisible = !isMenuDropdownVisible
-}
+// function toggleMenuDropdown() {
+//     isMenuDropdownVisible = !isMenuDropdownVisible
+// }
 
-function toggleUserDropdown() {
-    isUserDropdownVisible = !isUserDropdownVisible
-}
+// function toggleUserDropdown() {
+//     isUserDropdownVisible = !isUserDropdownVisible
+// }
+
+let MostrarProductos = ref<datosCards[]>([]);
+
+const filtrarProductos = (event: Event) => {
+    const input = (event.target as HTMLInputElement).value.toLowerCase(); 
+    console.log('Buscando productos con:', input);
+
+    filteredProductos.value = cards.value.filter(
+        (card) =>
+        card.name.toLowerCase().includes(input)
+    );
+
+    console.log('Resultados del filtro:', filteredProductos.value);
+};
+
 </script>
 
 <template>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Header from '@/components/header.vue'
 import Footer from '@/components/footer.vue'
-import { productosGuardados } from '@/components/iconos.vue';
+// import { productosGuardados } from '@/components/iconos.vue';
 import { useRouter } from 'vue-router';
 
 const router  = useRouter()
@@ -22,7 +22,7 @@ const router  = useRouter()
             </button>
           </div>
 
-          <div class="title">
+          <div class="title-saved">
             <h2>Tus productos guardados</h2>
             <li v-for="producto in productosGuardados" :key="producto.id">
               {{ producto.name }}

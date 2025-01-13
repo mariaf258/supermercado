@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import LogoutButton from '@/components/logoutButton.vue'
 import navToggle from '@/components/navToggle.vue'
+import HeaderPrincipal from '@/components/headerPrincipal.vue'
 import FooterPrincipal from '@/components/footerPrincipal.vue'
-import { card } from '@/utils/productos';
+import Iconos from '@/components/iconos.vue'
+import { cards } from '@/utils/productos';
 import { ref } from 'vue'
 
 let isMenuDropdownVisible = false
@@ -16,7 +18,7 @@ function toggleUserDropdown() {
   isUserDropdownVisible = !isUserDropdownVisible
 }
 
-const productos = ref(card.value.filter(producto => producto.id.toString().startsWith('3')));
+const productos = ref(cards.value.filter(producto => producto.id.toString().startsWith('3')));
 
 
 // const card = ref([
@@ -67,53 +69,10 @@ const productos = ref(card.value.filter(producto => producto.id.toString().start
 
 <template>
   <div id="app">
-    <div class="page-wrapper">
-      <div class="">
-        <header></header>
-        <div class="image-title align-items-center">
-          <img
-            src="../../public/Supermercado-title.png"
-            alt="supermercado xyz"
-            class="title-supermercado align-items-center"
-          />
-        </div>
+    <div class="page-wrap">
+      <HeaderPrincipal/>
 
-        <nav class="navbar bg-body-tertiary fixed-top">
-          <navToggle/>
-          <div class="d-flex align-items-center justify-content-between py-2 px-3">
-            <div class="search-container">
-              <div class="search-box">
-                
-                <input 
-                  @input="filtrarModulos" 
-                  type="text" 
-                  id="searchInput" 
-                  placeholder="Buscar..." 
-                />
-                <img src="../../public/search.png" alt="search" class="search-icon" />
-              </div>
-              <div id="results" class="results">
-                <ul>
-                </ul>
-              </div>
-            </div>
-
-            <a href="#" target="_blank">
-              <router-link to="/guardadosVacio">
-                <img src="../../public/bookmark-white.png" alt="bookmark" />
-              </router-link>
-            </a>
-            <a href="#" target="_blank">
-              <router-link to="/carritoVacio">
-                <img src="../../public/add-cart.png" alt="add-cart" />
-              </router-link>
-            </a>
-            <LogoutButton/>
-          </div>
-        </nav>
-      </div>
-
-      <p>Productos de Aseo del Hogar</p>
+      <p class="title-1">Productos de Aseo del Hogar</p>
       
       <div class="row g-2">
         <div class="col">
@@ -129,10 +88,16 @@ const productos = ref(card.value.filter(producto => producto.id.toString().start
                     <h3 class="product-amount">{{ product.amount }}</h3>
                     <h2 class="product-price">Precio: {{ product.price }}</h2>
                   </div>
-                  <div class="options">
-                    <img src="../../public/bookmark-color.png" alt="" />
-                    <img src="../../public/add-cart-color.png" alt="" />
-                  </div>
+                  <Iconos/>
+                  <!-- <div class="options">
+                    <button @click="productosGuardados" class="icon-button">
+                      <img src="../../public/bookmark-color.png" alt="bookmark-color" />
+                    </button>
+                    
+                    <button @click="productosAComprar" class="icon-button">
+                      <img src="../../public/add-cart-color.png" alt="add-cart-color" />
+                    </button>
+                  </div> -->
                 </div>
               </article>
             </div>
@@ -146,5 +111,5 @@ const productos = ref(card.value.filter(producto => producto.id.toString().start
 </template>
 
 <style>
-@import '/src/assets/footerPrincipal.css'
+@import '/src/assets/subCategorias.css'
 </style>

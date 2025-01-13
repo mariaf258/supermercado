@@ -10,4 +10,18 @@
     height: 20px;
     margin-right: 10px;
     cursor: pointer;
+    margin-top: 50px;
+    margin-bottom: -65px;
+}
+
+.options button {
+    background-color: transparent;
+    border: transparent;
+
+}
+
+.options button img {
+    background-color: transparent;
+    border: transparent;
+    
 }

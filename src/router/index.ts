@@ -8,6 +8,7 @@ import carrito from '@/views/carrito.vue'
 import alimentos from '@/views/alimentos.vue'
 import aseoPersonal from '@/views/aseoPersonal.vue'
 import aseoHogar from '@/views/aseoHogar.vue'
+import historialCompras from '@/views/historialCompras.vue'
 
 
 const router = createRouter({
@@ -57,6 +58,11 @@ const router = createRouter({
       path: '/aseoHogar',
       name: 'aseoHogar',
       component: aseoHogar
+    },
+    {
+      path: '/historialCompras',
+      name: 'historialCompras',
+      component: historialCompras
     },
     {
       path: '/about',

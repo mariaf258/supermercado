@@ -4,7 +4,7 @@
 import HeaderPrincipal from '@/components/headerPrincipal.vue'
 import FooterPrincipal from '@/components/footerPrincipal.vue'
 import Iconos from '@/components/iconos.vue'
-import { card } from '@/utils/productos';
+import { cards } from '@/utils/productos';
 import { ref } from 'vue'
 
 
@@ -20,24 +20,8 @@ function toggleUserDropdown() {
   isUserDropdownVisible = !isUserDropdownVisible
 }
 
-const productos = ref(card);
+const productos = ref(cards);
 
-
-
-// const productosGuardados = ref([]);
-// const productosCarrito = ref([]);
-
-// function guardarProducto(producto: datosCards) {
-//   if (!productosGuardados.value.find((item) => item.id === producto.id)) {
-//     productosGuardados.value.push(producto);
-//   }
-// }
-
-// function AgregarCarrito(producto: datosCards) {
-//   if (!productosCarrito.value.find((item) => item.id === producto.id)) {
-//     productosCarrito.value.push(producto);
-//   }
-// }
 
 // const card = ref([
 //   {

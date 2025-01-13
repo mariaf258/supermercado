@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import HeaderPrincipal from '@/components/headerPrincipal.vue'
 import FooterPrincipal from '@/components/footerPrincipal.vue'
-import { card } from '@/utils/productos';
+import Iconos from '@/components/iconos.vue'
+import { cards } from '@/utils/productos';
 import { ref } from 'vue'
 
 let isMenuDropdownVisible = false
@@ -15,7 +16,7 @@ function toggleUserDropdown() {
   isUserDropdownVisible = !isUserDropdownVisible
 }
 
-const productos = ref(card.value.filter(producto => producto.id.toString().startsWith('1')));
+const productos = ref(cards.value.filter(producto => producto.id.toString().startsWith('1')));
 
 // const card = ref([
 //   {
@@ -105,11 +106,11 @@ const productos = ref(card.value.filter(producto => producto.id.toString().start
 
 <template>
   <div id="app">
-    <div class="page-wrapper">
+    <div class="page-wrap">
       
       <HeaderPrincipal/>
 
-    <p>Alimentos</p>
+    <p class="title-1">Alimentos</p>
       
       <div class="row g-2">
         <div class="col">
@@ -125,10 +126,7 @@ const productos = ref(card.value.filter(producto => producto.id.toString().start
                     <h3 class="product-amount">{{ product.amount }}</h3>
                     <h2 class="product-price">Precio: {{ product.price }}</h2>
                   </div>
-                  <div class="options">
-                    <img src="../../public/bookmark-color.png" alt="" />
-                    <img src="../../public/add-cart-color.png" alt="" />
-                  </div>
+                  <Iconos/>
                 </div>
               </article>
             </div>
@@ -142,5 +140,5 @@ const productos = ref(card.value.filter(producto => producto.id.toString().start
 </template>
 
 <style>
-@import '/src/assets/footerPrincipal.css'
+@import '/src/assets/subCategorias.css'
 </style>

@@ -1,0 +1,10 @@
+.title-1 {
+    color: #2C3E50;
+    /* font-family: 'Courier New', Courier, monospace; */
+    font-size: 25px;
+    font-weight: bold;
+    /* position: relative; */
+    margin-left: 45px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
