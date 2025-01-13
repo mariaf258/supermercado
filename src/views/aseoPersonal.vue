@@ -2,6 +2,7 @@
 import LogoutButton from '@/components/logoutButton.vue'
 import navToggle from '@/components/navToggle.vue'
 import FooterPrincipal from '@/components/footerPrincipal.vue'
+import { card } from '@/utils/productos';
 import { ref } from 'vue'
 
 let isMenuDropdownVisible = false
@@ -15,50 +16,53 @@ function toggleUserDropdown() {
   isUserDropdownVisible = !isUserDropdownVisible
 }
 
-const card = ref([
-  {
-    id: 13,
-    image: '../../public/jabon.png',
-    name: 'JABÓN DOVE',
-    amount: '3 Unidades',
-    price: '15.400'
-  },
-  {
-    id: 14,
-    image: '../../public/listerine.png',
-    name: 'LISTERINE',
-    amount: '500 ml',
-    price: '17.200'
-  },
-  {
-    id: 15,
-    image: '../../public/cepillo-de-dientes.png',
-    name: 'CEPILLO DE DIENTES',
-    amount: '1 Unidad',
-    price: '4.000'
-  },
-  {
-    id: 16,
-    image: '../../public/crema-colgate.png',
-    name: 'CREMA COLGATE',
-    amount: '75 ml',
-    price: '6.600'
-  },
-  {
-    id: 17,
-    image: '../../public/Papel-Higienico.png',
-    name: 'PAPEL HIGIENICO',
-    amount: '4 Rollos',
-    price: '9.600'
-  },
-  {
-    id: 18,
-    image: '../../public/shampoo.png',
-    name: 'SHAMPOO',
-    amount: '375 ml',
-    price: '25.650'
-  }
-])
+const productos = ref(card.value.filter(producto => producto.id.toString().startsWith('2')));
+
+
+// const card = ref([
+//   {
+//     id: 13,
+//     image: '../../public/jabon.png',
+//     name: 'JABÓN DOVE',
+//     amount: '3 Unidades',
+//     price: '15.400'
+//   },
+//   {
+//     id: 14,
+//     image: '../../public/listerine.png',
+//     name: 'LISTERINE',
+//     amount: '500 ml',
+//     price: '17.200'
+//   },
+//   {
+//     id: 15,
+//     image: '../../public/cepillo-de-dientes.png',
+//     name: 'CEPILLO DE DIENTES',
+//     amount: '1 Unidad',
+//     price: '4.000'
+//   },
+//   {
+//     id: 16,
+//     image: '../../public/crema-colgate.png',
+//     name: 'CREMA COLGATE',
+//     amount: '75 ml',
+//     price: '6.600'
+//   },
+//   {
+//     id: 17,
+//     image: '../../public/Papel-Higienico.png',
+//     name: 'PAPEL HIGIENICO',
+//     amount: '4 Rollos',
+//     price: '9.600'
+//   },
+//   {
+//     id: 18,
+//     image: '../../public/shampoo.png',
+//     name: 'SHAMPOO',
+//     amount: '375 ml',
+//     price: '25.650'
+//   }
+// ])
 </script>
 
 <template>
@@ -114,16 +118,16 @@ const card = ref([
       <div class="row g-2">
         <div class="col">
           <div class="p-3">
-            <div class="card" v-for="item in card" :key="item.id" style="width: 18rem">
+            <div class="product-card" v-for="product in productos" :key="product.id" style="width: 18rem">
               <article @click="expandImage(item.image)">
                 <div class="image-container">
-                  <img :src="item.image" class="card-img-top" :alt="item.name" />
+                  <img :src="product.image" class="card-img-top" :alt="product.name" />
                 </div>
                 <div class="card-body">
                   <div class="card-text">
-                    <h1>{{ item.name }}</h1>
-                    <h3>{{ item.amount }}</h3>
-                    <h2>Precio: {{ item.price }}</h2>
+                    <h1 class="product-name">{{ product.name }}</h1>
+                    <h3 class="product-amount">{{ product.amount }}</h3>
+                    <h2 class="product-price">Precio: {{ product.price }}</h2>
                   </div>
                   <div class="options">
                     <img src="../../public/bookmark-color.png" alt="" />

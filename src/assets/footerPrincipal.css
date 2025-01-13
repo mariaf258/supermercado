@@ -63,3 +63,70 @@
   line-height: 1.5;
 }
 
+/***********************************/
+
+.footer-1  {
+  width: 100%;
+  padding: 20px;
+  border-radius: 0px 0px 10px 10px;
+  border: 1px solid #f96616;
+  /* background-color: #f96616; */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: white;
+}
+
+.footer-container1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.logo-supermercado {
+    width: 230px;
+    height: 150px;
+}
+
+.footer-inicio p {
+  margin: 0;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 17px;
+  text-align: center;
+}
+
+.separator {
+  border-left: 1px solid white;
+  height: 100px;
+  margin: 0 20px;
+}
+
+.footer-right-v {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.maps-cont,
+.call-cont {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.maps-cont img,
+.call-cont img {
+  width: 25px;
+  height: 25px;
+}
+
+.maps-v,
+.call-v {
+  font-size: 14px;
+  line-height: 1.5;
+}
+

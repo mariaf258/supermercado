@@ -1,107 +1,66 @@
-.footer-1 {
-    width: 100%;
-    height: 100%;
-    justify-content: space-around;
-    align-items: center;
-    padding: 20px;
-    border-radius: 0px 0px 10px 10px;
-    border: 1px solid #f96616;
+
+.footer-1  {
+  width: 100%;
+  padding: 20px;
+  border-radius: 0px 0px 10px 10px;
+  border: 1px solid #f96616;
+  /* background-color: #f96616; */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: #f96616;
 }
 
 .footer-container1 {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding-bottom: 10px;
-    margin-left: -70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.footer-right-v {
-    display: flex;
-    flex-direction: column; /* Las secciones maps y call estarán en columnas */
-    gap: 20px; /* Espacio entre los contenedores maps y call */
+.logo-supermercado {
+    width: 230px;
+    height: 150px;
 }
 
-.footer-right-v div {
-    display: flex;
-    align-items: center;
-}
-
-.footer-right-v p {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    /* padding: 20px; */
-    justify-content: space-around;
-}
-
-.footer-right-v img {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    /* padding: 20px; */
-    justify-content: space-around;
-    margin-left: -130px;
+.footer-inicio p {
+  margin: 0;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 17px;
+  text-align: center;
 }
 
 .separator-v {
-    border-left: 1px solid #f96616;
-    height: 170px;
-    display: inline-block;
-    margin-right: 20px;
+  border-left: 1px solid #f96616;
+  height: 100px;
+  margin: 0 20px;
+}
+
+.footer-right-v {
+  /* display: flex; */
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
 }
 
 .maps-cont,
 .call-cont {
-  display: flex; /* Coloca la imagen y el texto en una fila */
-  align-items: center; /* Alinea verticalmente la imagen con el texto */
-  gap: 10px; /* Espacio entre la imagen y el texto */
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-.footer-1 p {
-    /* width: 100%; */
-    height: 100%;
-    left: 20px;
-    color: #f96616;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    display: flex;
-    margin-left: -90px;
-    font-size: 17px;
-}
-
-.footer-1 img {
-    width: 230px;
-    height: 150px;
-    /* background-color: #f96616; */
-    /* margin-left: 20px;w */
-    margin-top: 20px;
-}
-
-
-.footer-maps,
-.footer-call {
-    margin: 0; /* Elimina márgenes predeterminados del texto */
-    color: #f96616;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: 17px;
-}
-
-p.footer-maps {
-    width: 300px;
-    margin-right: -50px;
-    margin-top: -50px;
-    text-align: center;
+.maps-cont img,
+.call-cont img {
+  width: 25px;
+  height: 25px;
 }
 
 .maps-v,
 .call-v {
-    width: 35px; /* Ajusta el tamaño de las imágenes */
-    height: 35px;
+  font-size: 14px;
+  line-height: 1.5;
 }
 
-p.footer-call {
-    width: 300px;
-    margin-right: -250px;
-    margin-top: -48px;
-    text-align: center;
-}

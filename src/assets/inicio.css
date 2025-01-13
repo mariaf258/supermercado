@@ -25,7 +25,7 @@
     align-items: end;
 }
 
-.card {
+.product-card {
     border-radius: 10px;
     border: 2px solid #f96616;
     box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1);
@@ -35,7 +35,7 @@
     margin-left: 20px;
 }
 
-.card:hover {
+.product-card:hover {
     border: 4px solid rgb(249, 101, 21, 0.8);
 }
 

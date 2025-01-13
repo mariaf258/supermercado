@@ -8,11 +8,11 @@ let isMenuDropdownVisible = false
 let isUserDropdownVisible = false
 
 function toggleMenuDropdown() {
-  isMenuDropdownVisible = !isMenuDropdownVisible
+    isMenuDropdownVisible = !isMenuDropdownVisible
 }
 
 function toggleUserDropdown() {
-  isUserDropdownVisible = !isUserDropdownVisible
+    isUserDropdownVisible = !isUserDropdownVisible
 }
 </script>
 
@@ -48,12 +48,12 @@ function toggleUserDropdown() {
                 </div>
 
                 <a href="#" target="_blank">
-                <router-link to="/guardadosVacio">
+                <router-link to="/guardados">
                     <img src="../../public/bookmark-white.png" alt="bookmark" />
                 </router-link>
                 </a>
                 <a href="#" target="_blank">
-                <router-link to="/carritoVacio">
+                <router-link to="/carrito">
                     <img src="../../public/add-cart.png" alt="add-cart" />
                 </router-link>
                 </a>

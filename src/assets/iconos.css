@@ -1,0 +1,13 @@
+
+.options {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.options img {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    cursor: pointer;
+}
