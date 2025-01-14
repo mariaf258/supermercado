@@ -44,5 +44,5 @@ const router  = useRouter()
 </template>
 
 <style>
-@import '/src/assests/guardados.css'
+@import '/src/assets/guardados.css'
 </style>

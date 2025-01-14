@@ -1,4 +1,4 @@
-export interface datosCards {
+export interface Productos {
     id?: string
     image?: string
     name?: string
@@ -7,7 +7,7 @@ export interface datosCards {
     category?: string
 }
 
-export default class ProductosDefault implements datosCards {
+export default class ProductosDefault implements Productos {
     id?: "";
     image?: "";
     name?: "";

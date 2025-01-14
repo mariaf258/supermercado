@@ -1,10 +1,9 @@
 export interface Categoria {
-    id?: string
+    id_categoria?: string
     name?: string
-    
 }
 
 export default class CategoriaDefault implements Categoria {
-    id?: "";
+    id_categoria?: "";
     name?: "";
 }

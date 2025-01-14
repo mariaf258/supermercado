@@ -1,4 +1,4 @@
-import Categoria from '@/utils/interfaces/interfaceCategoria'
+import Productos from '@/utils/interfaces/interfaceProductos'
 import { getFirestore, getDocs, addDoc, updateDoc, deleteDoc, collection, doc } from 'firebase/firestore';
 import app from '@/utils/firebase'
 

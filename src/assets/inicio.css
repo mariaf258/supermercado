@@ -1,6 +1,4 @@
 
-/*//////*/
-
 .page-wrapper p {
     font-size: 17px;
     font-weight: bold;
@@ -114,3 +112,12 @@
     border: transparent;
     
 } */
+
+@media screen and (max-width: 1300px) {
+    .navbar-nav {
+        flex-grow: 1;
+        /* display: flex;
+        justify-content: flex-end; */
+    }
+
+}

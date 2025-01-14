@@ -213,15 +213,6 @@ const productos = ref(cards);
                     <h2 class="product-price">Precio: {{ product.price }}</h2>
                   </div>
                   <Iconos/>
-                  <!-- <div class="options">
-                    <button @click="productosGuardados" class="icon-button">
-                      <img src="../../public/bookmark-color.png" alt="bookmark-color" />
-                    </button>
-                    
-                    <button @click="productosAComprar" class="icon-button">
-                      <img src="../../public/add-cart-color.png" alt="add-cart-color" />
-                    </button>
-                  </div> -->
                 </div>
               </article>
             </div>
