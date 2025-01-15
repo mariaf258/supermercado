@@ -1,4 +1,4 @@
-import Productos from '@/utils/interfaces/interfaceProductos'
+import Producto from '@/utils/interfaces/interfaceProductos'
 import { getFirestore, getDocs, addDoc, updateDoc, deleteDoc, collection, doc } from 'firebase/firestore';
 import app from '@/utils/firebase'
 
@@ -6,7 +6,7 @@ const db = getFirestore(app)
 
 export class categoriasServicio {
 
-    async obtenerCategorias () : Promise<Categoria[] >{
+    async obtenerCategorias () : Promise<Producto[] >{
         try {
             const response = await getDocs(collection(db, 'Categorias'))
             return response.docs.map((registro) => ({

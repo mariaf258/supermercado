@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Header from '@/components/header.vue'
 import Footer from '@/components/footer.vue'
-import navToggle_categorias from '@/components/navToggle_categorias.vue'
+import navToggle_categorias from '@/components/navToggle/navToggle_categorias.vue'
 
 import { useRouter } from 'vue-router';
 

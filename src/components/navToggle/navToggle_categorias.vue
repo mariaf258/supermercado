@@ -15,7 +15,7 @@ const handleClick = (item: string) => {
 <template>
     <div class="menuToggle">
         <img
-        src="../../public/menu-color.png"
+        src="../../../public/menu-color.png"
         alt="menu-categorias"
         @click="toggleMenu_categorias"
         class="menu-categorias"
@@ -42,6 +42,9 @@ const handleClick = (item: string) => {
             </li>
             <li @click="handleClick('historialCompras')">
                 <router-link to="/historialCompras">Historial de Compras</router-link>
+            </li>
+            <li @click="handleClick('inventario')">
+                <router-link to="/inventario">Inventario de Productos</router-link>
             </li>
         </ul>
         </div>

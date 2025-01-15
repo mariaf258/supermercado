@@ -117,7 +117,7 @@ const productos = ref(cards);
         
         <div class="option">
             <p class="fecha">Fecha: DD/MM/AA</p>
-            <p class="n-compra">N° de Compra</p>
+            <p class="n-compra">N° de Compra: </p>
         </div>
         
         <div class="row g-2">

@@ -1,0 +1,54 @@
+
+.button_container {
+    position: relative;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    /* background-color: #f96616; */
+    /* border: 1px solid #f96616; */
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.expand_button:hover {
+    visibility: visible;
+    opacity: 1;
+}
+
+.expand_button img {
+    width: 30px;
+    height: 30px;
+    justify-content: end;
+    background-color: #f96616;
+    /* border: 1px solid #f96616; */
+    border-radius: 5px;
+    position: absolute;
+    z-index: 2;
+    padding: 2px;
+    left: -10%;
+    top: -10px;
+    cursor: pointer;
+}
+
+.expand_button {
+    width: 20px;
+    height: 20px;
+    justify-content: end;
+    /* background-color: #f96616; */
+    /* border: 1px solid #f96616; */
+    border-radius: 5px;
+    position: absolute;
+    z-index: 2;
+    padding: 2px;
+    left: 80rem;
+    top: -50px;
+}
+
+.p_3 {
+    display: grid;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px 20px;
+    /* margin-top: -2%; */
+    grid-template-columns: repeat(4, 1fr);
+}

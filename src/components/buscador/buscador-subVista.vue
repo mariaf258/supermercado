@@ -24,7 +24,7 @@ onMounted(() => {
             id="searchInput-1" 
             placeholder="Buscar..." 
             />
-            <img src="../../.png" alt="search" class="search-icon-1" />
+            <img src="../../../public/search.png" alt="search" class="search-icon-1" />
         </div>
         <div id="results" class="results-1">
             <ul>

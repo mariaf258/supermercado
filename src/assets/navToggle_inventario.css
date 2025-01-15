@@ -1,0 +1,91 @@
+.menuToggle_fill {
+    position: absolute;
+    left: 81rem;
+    z-index: 2;
+    /* border: 1px solid black; */
+    top: 17rem;
+}
+
+.menu_fill {
+    position: relative;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background-color: #f96616; /* Color inicial */
+    border: 1px solid #f96616;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.1s ease, border-radius 0.3s ease; /* Transición suave */
+    top: 20px;
+}
+
+.menu_fill.active {
+    background-color: transparent; /* Fondo transparente cuando está activo */
+    border: 1px solid rgba(249, 102, 22, 0.7); /* Borde con transparencia */
+    border-radius: 0; /* Sin radio en los bordes */
+}
+
+.menu_fill_2 {
+    position: relative;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    /* background-color: #f96616; */
+    border: 2px solid #f96616;
+    /* border-radius: 3px; */
+    cursor: pointer;
+    /* transition: background-color 0.3s ease, border-radius 0.3s ease; */
+    left: 81%;
+    top: -10px;
+}
+
+.menu_fill_2.active {
+    background-color: transparent; /* Fondo transparente cuando está activo */
+    border: 1px solid rgba(249, 102, 22, 0.7); /* Borde con transparencia */
+    border-radius: 0; /* Sin radio en los bordes */
+}
+
+
+.dropdown-menu-fill {
+    position: absolute;
+    top: 20px;
+    right: 0px;
+    background-color: rgb(249, 102, 22, 0.7);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    padding: 10px 0 0;
+    /* border-radius: 5px; */
+    display: none;
+    flex-direction: column;
+    z-index: 1000;
+    min-width: 160px;
+}
+
+.dropdown-menu-fill.show {
+    display: flex; 
+}
+
+.navbar-nav-fill {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-nav-fill li {
+    padding: 10px 0px 10px 8px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.349);
+}
+
+.navbar-nav-fill a {
+    /* padding: 10px 15px; */
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+/* .navbar-nav-fill li:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  } */

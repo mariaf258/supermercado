@@ -27,6 +27,7 @@ const handleClick = (item: string) => {
         <li @click="handleClick('aseoPersonal')"><router-link to="/aseoPersonal">Productos de Aseo Personal</router-link></li>
         <li @click="handleClick('aseoHogar')"><router-link to="/aseoHogar">Productos de Aseo del Hogar</router-link></li>
         <li @click="handleClick('historialCompras')"><router-link to="/historialCompras">Historial de Compras</router-link></li>
+        <li @click="handleClick('inventario')"><router-link to="/inventario">Inventario de Productos</router-link></li>
       </ul>
     </div>
   </div>

@@ -4,7 +4,7 @@ import app from '@/utils/firebase'
 
 const db = getFirestore(app) 
 
-export class categoriasServicio {
+export class categoriaServicio {
 
     async obtenerCategorias () : Promise<Categoria[] >{
         try {
@@ -21,7 +21,7 @@ export class categoriasServicio {
     async crearCategoria(categoria: Categoria){
         try {
             if (!categoria || Object.keys(categoria).length === 0) {
-                throw new Error('Los datos del empleado son inválidos.');
+                throw new Error('Los datos de la categoria son inválidos.');
             }
             const { id, ...datosId } = categoria;
             const response = await addDoc(collection(db, 'Categorias'), datosId);

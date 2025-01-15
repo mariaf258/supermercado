@@ -1,15 +1,3 @@
-/* #app {
-  width: 100%;
-  height: 100%;
-  display: flex;
-} */
-
-/* 
-body {
-  border-radius: 10px;
-  display: none;
-} */
-
 header {
     width: 100%;
     height: 20px;
@@ -28,8 +16,6 @@ header {
     height: auto;
     align-items: center;
 }
-
-
 
 .search-container {
     position: relative;
@@ -95,7 +81,6 @@ header {
     border-bottom: none;
 }
 
-
 .menu {
     width: 30px;
     height: 30px;
@@ -122,17 +107,6 @@ header {
 .offcanvas-body {
     display: none;
 }
-/* 
-.dropdown-menu {
-    position: absolute;
-    top: 60px;
-    left: 20px;
-    background-color: white;
-    border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-} */
 
 .d-flex {
     display: flex;
@@ -182,19 +156,6 @@ header {
 }
 
 /*///////*/
-
-/* .dropdown-menu {
-    position: absolute;
-    top: 0px;
-    right: 0;
-    background-color: rgba(67, 42, 136, 0.8);
-    border-radius: 10px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-    padding: 10px;
-    z-index: 1;
-    min-width: 150px;
-    transition: all 0.3s ease;
-} */
 
 .dropdown-menu ul {
     list-style: none;

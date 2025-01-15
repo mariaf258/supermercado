@@ -5,16 +5,6 @@ import { filteredProductos, filtrarProductos } from '@/utils/buscador';
 import { cards } from '@/utils/productos';
 import { ref, onMounted } from 'vue'
 
-// let isMenuDropdownVisible = false
-// let isUserDropdownVisible = false
-
-// function toggleMenuDropdown() {
-//     isMenuDropdownVisible = !isMenuDropdownVisible
-// }
-
-// function toggleUserDropdown() {
-//     isUserDropdownVisible = !isUserDropdownVisible
-// }
 
 const inputValue = ref('');
 

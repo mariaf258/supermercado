@@ -28,7 +28,7 @@
     height: 30px;
   } */
   
-  .tooltip {
+  /* .tooltip {
     visibility: hidden;
     background-color: #f96616;
     color: #fff;
@@ -44,7 +44,7 @@
     transition: opacity 0.3s;
     white-space: nowrap;
     height: 30px;
-  }
+  } */
   
   .expand-button:hover .tooltip {
     visibility: visible;
@@ -64,21 +64,21 @@
     top: -30px;
   }
   
-  .Ellipse {
-    max-width: 1000px;
-    width: 150px;
-    height: 150px;
-    margin-bottom: 1rem;
-    margin-top: -100px;
-  }
+    /* .Ellipse {
+      max-width: 1000px;
+      width: 150px;
+      height: 150px;
+      margin-bottom: 1rem;
+      margin-top: -100px;
+    } */
   
-  .shopping-cart {
+  /*.shopping-cart {
     max-width: 1000px;
     width: 100px;
     height: 100px;
     margin-top: -140px;
     margin-bottom: 50px;
-  }
+  } */
   
   .title-saved h2 {
     /* font-size: 1.5rem; */

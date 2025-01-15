@@ -9,6 +9,7 @@ import alimentos from '@/views/alimentos.vue'
 import aseoPersonal from '@/views/aseoPersonal.vue'
 import aseoHogar from '@/views/aseoHogar.vue'
 import historialCompras from '@/views/historialCompras.vue'
+import inventario from '@/views/inventario.vue'
 
 
 const router = createRouter({
@@ -63,6 +64,11 @@ const router = createRouter({
       path: '/historialCompras',
       name: 'historialCompras',
       component: historialCompras
+    },  
+    {
+      path: '/inventario',
+      name: 'inventario',
+      component: inventario
     },
     {
       path: '/about',
