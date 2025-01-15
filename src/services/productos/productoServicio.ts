@@ -4,11 +4,11 @@ import app from '@/utils/firebase'
 
 const db = getFirestore(app) 
 
-export class categoriasServicio {
+export class productoServicio {
 
-    async obtenerCategorias () : Promise<Producto[] >{
+    async obtenerProductos () : Promise<Producto[] >{
         try {
-            const response = await getDocs(collection(db, 'Categorias'))
+            const response = await getDocs(collection(db, 'Productos'))
             return response.docs.map((registro) => ({
                 id: registro.id,
                 ...registro.data()
@@ -18,46 +18,46 @@ export class categoriasServicio {
         }
     }
     
-    async crearCategoria(categoria: Categoria){
+    async crearProducto(producto: Producto){
         try {
-            if (!categoria || Object.keys(categoria).length === 0) {
-                throw new Error('Los datos del empleado son inválidos.');
+            if (!producto || Object.keys(producto).length === 0) {
+                throw new Error('Los datos del producto son inválidos.');
             }
-            const { id, ...datosId } = categoria;
-            const response = await addDoc(collection(db, 'Categorias'), datosId);
-            console.log('Categoria creada:', response.id,);
+            const { id, ...datosId } = producto;
+            const response = await addDoc(collection(db, 'Productos'), datosId);
+            console.log('Producto creado:', response.id,);
             
-            await this.obtenerCategorias();
+            await this.obtenerProductos();
             return response;
         } catch (error) {
             console.log('Error al crear categoria:', error);
         }
     }
 
-    async actualizarCategoria(id: string, nuevosDatos: object): Promise<boolean> {
+    async actualizarProducto(id: string, nuevosDatos: object): Promise<boolean> {
         try {
             if (!id || Object.keys(nuevosDatos).length === 0) {
                 throw new Error('Id inválido o datos vacios.');
             }
-            const docRef = await doc(collection(db, 'Categorias'), id);
+            const docRef = await doc(collection(db, 'Productos'), id);
             await updateDoc(docRef, nuevosDatos);
-            console.log('Categoria actualizada correctamente:', id);
+            console.log('Producto actualizado correctamente:', id);
             return true;
         } catch (error) {
-            console.log('Error al actualizar categoria:', error);
+            console.log('Error al actualizar producto:', error);
             return false;
         }
     }
 
-    async eliminarCategoria(id: string): Promise<boolean> {
+    async eliminarProducto(id: string): Promise<boolean> {
         try {
-            console.log('Intentando elimminar empleado con id:', id);
-            const docRef = doc(db, 'Categorias', id);
+            console.log('Intentando eliminar producto con id:', id);
+            const docRef = doc(db, 'Productos', id);
             const response = await deleteDoc(docRef);
 
             return true;
         } catch (error) {
-            console.log('Error al eliminar el empleado;', error);
+            console.log('Error al eliminar el producto;', error);
             return false;
         }
     }

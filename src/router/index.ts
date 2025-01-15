@@ -10,6 +10,9 @@ import aseoPersonal from '@/views/aseoPersonal.vue'
 import aseoHogar from '@/views/aseoHogar.vue'
 import historialCompras from '@/views/historialCompras.vue'
 import inventario from '@/views/inventario.vue'
+import agregarProducto from '@/components/agregarProducto.vue'
+import actualizarProducto from '@/components/actualizarProducto.vue'
+import eliminarProducto from '@/components/eliminarProducto.vue'
 
 
 const router = createRouter({
@@ -69,6 +72,21 @@ const router = createRouter({
       path: '/inventario',
       name: 'inventario',
       component: inventario
+    },  
+    {
+      path: '/agregarProducto',
+      name: 'agregarProducto',
+      component: agregarProducto
+    },
+    {
+      path: '/actualizarProducto',
+      name: 'actualizarProducto',
+      component: actualizarProducto
+    },  
+    {
+      path: '/eliminarProducto',
+      name: 'eliminarProducto',
+      component: eliminarProducto
     },
     {
       path: '/about',
