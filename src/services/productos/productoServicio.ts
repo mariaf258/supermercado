@@ -62,4 +62,16 @@ export class productoServicio {
         }
     }
 
+    filtrarProductosPorCategoria (Product: ProductoDefault[] ){
+        const cadenaRegex = localStorage.getItem("modulo")|| '' ;
+    
+        const productosPorCategoria =  Product.filter((Product) => Product.etiqueta?.includes(cadenaRegex))
+        .sort((a, b) => { 
+            const numA = parseInt(a.id.split('-')[2], 10);
+            const numB = parseInt(b.id.split('-')[2], 10);
+            return numA - numB;
+        });
+
+        return productosPorCategoria;
+    }
 }
