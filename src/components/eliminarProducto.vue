@@ -73,7 +73,7 @@ const eliminarProducto = async (id: string | undefined) => {
 
 
 const cancelUpdate = () => {
-    selectedCard.value = null;
+    selectedProduct.value = null;
 };
 
 </script>
@@ -97,10 +97,10 @@ const cancelUpdate = () => {
         <select class="form-select" 
             v-model="selectedProduct"
             aria-label="Default select example">
-            <option disabled value="">Seleccione producto</option>
+            <option disabled value="Seleccione Categoria">Seleccione Categoria</option>
             <option
             class="card-delete"
-            v-for="card in cards"
+            v-for="card in Product"
             :key="card.id"
             :value="card"
             @click="openUpdateForm(card)"
@@ -109,56 +109,37 @@ const cancelUpdate = () => {
             <p>{{ card.category }}</p>
             </option>
         </select>
+
+            <div class="search_container_1">
+                <div class="search_box_1">
+                    <input 
+                    @input="filtrar" 
+                    type="text" 
+                    id="searchInput_1" 
+                    placeholder="Buscar..." 
+                    />
+                        <img src="../../public/search.png" alt="search" class="search_icon_1" />
+                </div>
+                <div id="results" class="results_1">
+                    <ul>
+                        <li v-for="producto in filteredProductos" :key="producto.id">
+                            {{ producto.name }} - {{ producto.description }}
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </main>
 
-        <section v-if="selectedProduct" class="section-producto">
-        <div class="formulario">
-        <form class="form-producto" @submit.prevent="crearProducto()">
-            
-            <div class="form-row">
-                <div class="column">
-                    <div class="form-group">
-                        <input type="name" v-model="datos.name" placeholder="" />
-                        <label class="form-label">Nombre del Producto</label>
-                    </div>
-                    <div class="form-group">
-                        <input type="post" v-model="datos.price" placeholder="" />
-                        <label class="form-label">Precio del Producto</label>
-                    </div>
-                    <div class="form-group">
-                        <input type="etiqueta" v-model="datos.amount" placeholder="" />
-                        <label class="form-label">Cantidad del Producto</label>
-                    </div>
-                    <div class="form-group">
-                        <input type="etiqueta" v-model="datos.category" placeholder="" />
-                        <label class="form-label">Categoria del Producto</label>
-                    </div>
-                </div>
+        <section v-if="selectedProduct" class="section-delete">
+                <div class="formulario">
                 
-                <div class="column">
-                    
-                    <div class="image-uploader">
-                        <div class="image-preview" v-if="imagePreview">
-                            <img :src="imagePreview" alt="Previsualización de la imagen" />
+                    <div class="card-body">
+                        <div class="card-text">
+                            <h1 class="product-name">{{ product.name }}</h1>
+                            <h3 class="product-amount">{{ product.amount }}</h3>
+                            <h2 class="product-price">Precio: {{ product.price }}</h2>
                         </div>
-                        <div class="image-placeholder" v-else>
-                            <img src="../../public/photo-off.png" alt="Sin imagen seleccionada" />
-                        </div>
-                        <div class="form-photo">
-                        <input type="file" @change="handleFileUpload" />
-                        <label class="form-label">Imagen del Producto</label>
-                    
-                        </div>
-                    </div>
-
-                </div>
-            </div>    
-        </form>
-
-                    <div class="buttons">
-
-                    <button class="btn btn-primary-add" type="submit" @click="crearProducto()"> Eliminar </button>
-
+                        <img src="../../public/trash-color.png" alt="">
                     </div>
                 </div>
             </section>
@@ -171,5 +152,5 @@ const cancelUpdate = () => {
 </template>
 
 <style>
-@import '/src/assets/agregarProducto.css'
+@import '/src/assets/eliminarProducto.css'
 </style>

@@ -85,33 +85,7 @@
     color: black;
     text-align: left;
 }
-/* 
-.options {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-}
 
-.options img {
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
-    cursor: pointer;
-    margin-top: 50px;
-    margin-bottom: -65px;
-}
-
-.options button {
-    background-color: transparent;
-    border: transparent;
-
-}
-
-.options button img {
-    background-color: transparent;
-    border: transparent;
-    
-} */
 
 @media screen and (max-width: 1300px) {
     .navbar-nav {

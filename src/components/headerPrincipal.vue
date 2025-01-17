@@ -33,23 +33,23 @@ onMounted(() => {
             <navToggle/>
             <div class="d-flex align-items-center justify-content-between py-2 px-3">
                 <div class="search-container">
-                <div class="search-box">
-                    
-                    <input 
-                    @input="filtrar" 
-                    type="text" 
-                    id="searchInput" 
-                    placeholder="Buscar..." 
-                    />
-                    <img src="../../public/search.png" alt="search" class="search-icon" />
-                </div>
-                <div id="results" class="results">
-                    <ul>
-                        <li v-for="producto in filteredProductos" :key="producto.id">
-                            {{ producto.name }} - {{ producto.description }}
-                        </li>
-                    </ul>
-                </div>
+                    <div class="search-box">
+                        
+                        <input 
+                        @input="filtrar" 
+                        type="text" 
+                        id="searchInput" 
+                        placeholder="Buscar..." 
+                        />
+                        <img src="../../public/search.png" alt="search" class="search-icon" />
+                    </div>
+                    <div id="results" class="results">
+                        <ul>
+                            <li v-for="producto in filteredProductos" :key="producto.id">
+                                {{ producto.name }} - {{ producto.description }}
+                            </li>
+                        </ul>
+                    </div>
                 </div>
 
                 <a href="#" target="_blank">
