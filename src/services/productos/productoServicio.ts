@@ -1,37 +1,39 @@
 import Producto from '@/utils/interfaces/interfaceProductos'
 import { getFirestore, getDocs, addDoc, updateDoc, deleteDoc, collection, doc } from 'firebase/firestore';
 import app from '@/utils/firebase'
+import ProductoDefault from '@/utils/interfaces/interfaceProductos';
 
 const db = getFirestore(app) 
 
 export class productoServicio {
 
-    async obtenerProductos () : Promise<Producto[] >{
+    async obtenerProductos() {
         try {
-            const response = await getDocs(collection(db, 'Productos'))
-            return response.docs.map((registro) => ({
-                id: registro.id,
-                ...registro.data()
-            }))
+          const response = await fetch('/api/productos'); // o la URL de tu API
+          const data = await response.json();
+          return data; // Asegúrate de que el formato de datos sea el esperado
         } catch (error) {
-            return [];
+          console.error('Error al obtener productos:', error);
+          return [];
         }
     }
     
-    async crearProducto(producto: Producto){
+    async crearProducto(producto: ProductoDefault) {
         try {
-            if (!producto || Object.keys(producto).length === 0) {
-                throw new Error('Los datos del producto son inválidos.');
+            const docRef = await addDoc(collection(db, 'productos'), {
+                name: producto.name,
+                price: producto.price,
+                amount: producto.amount,
+                category: producto.category,
+                image: producto.image ? producto.image.name : '', // Solo el nombre de la imagen
+                unit: producto.unit, // Guardar la unidad seleccionada
+                customUnit: producto.unit === 'otra' ? producto.customUnit : '', // Si la unidad es "otra", guardar la unidad personalizada
+            });
+            return docRef.id; // Retorna el ID del documento creado
+            } catch (error) {
+            console.error('Error al agregar el producto:', error);
+            throw error;
             }
-            const { id, ...datosId } = producto;
-            const response = await addDoc(collection(db, 'Productos'), datosId);
-            console.log('Producto creado:', response.id,);
-            
-            await this.obtenerProductos();
-            return response;
-        } catch (error) {
-            console.log('Error al crear categoria:', error);
-        }
     }
 
     async actualizarProducto(id: string, nuevosDatos: object): Promise<boolean> {

@@ -3,7 +3,6 @@ import ProductosDefault from '@/utils/interfaces/interfaceProductos';
 export const alertaCamposProducto = (datos: ProductosDefault): boolean => {
     if (
         !datos.name ||
-        !datos.image ||
         !datos.amount ||
         !datos.price ||
         !datos.category 

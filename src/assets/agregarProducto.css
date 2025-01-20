@@ -2,6 +2,34 @@ main {
     height: 100vh;
 }
 
+select.unit-select {
+    width: 60%; 
+    padding: 6px 18px; 
+    font-size: 16px;
+    border-radius: 5px; 
+    border: 1px solid #f96616;
+    color: black; 
+    transition: 0.15s all ease;
+    margin-bottom: 7%; 
+}
+
+select.unit-select:focus {
+    border-color: white; 
+    outline: none;
+    box-shadow: 0 0 0 2px #f96616;
+}
+
+select.unit-select option {
+    font-size: 16px;
+    color: #595959; 
+}
+
+select.unit-select option:hover {
+    background-color: #f96616; 
+    color: white;
+}
+
+
 .section-producto, .form-producto  {
     width: 90%;
     height: 25rem;

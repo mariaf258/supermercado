@@ -5,6 +5,8 @@ export interface Productos {
     amount?: string
     price?: string
     category?: string
+    unit?: string
+    customUnit?: string
 }
 
 export default class ProductosDefault implements Productos {
@@ -14,4 +16,6 @@ export default class ProductosDefault implements Productos {
     amount?: "";
     price?: "";
     category?: "";
+    unit?: "";
+    customUnit?: "";
 }
