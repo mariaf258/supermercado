@@ -12,18 +12,13 @@ const router  = useRouter()
   <div id="app">
     <div class="page-wrapper">
       <div class="">
-        <!-- <header>
-          <img src="../../public/img/Supermercado-title-color.png" alt="" />
-          <h1>Tu compra es <b>100% segura</b></h1>
-          <img src="../../public/img/security.png" alt="" />
-        </header> -->
+        
         <Header/>
 
         <main class="main">
           <div class="button-container">
             <button class="expand-button">
               <img src="../../public/back-white.png" alt="" @click="router.go(-1)"/>
-              <!-- <span class="tooltip">Sigue comprando</span> -->
             </button>
           </div>
 

@@ -8,10 +8,23 @@ import { ref, onMounted } from 'vue'
 
 const inputValue = ref('');
 
-const filtrar = (event: Event) => {
-    inputValue.value = (event.target as HTMLInputElement).value;
-    filtrarProductos(cards.value, inputValue.value);
+const filtrarProductos = (event: Event) => {
+    const input = (event.target as HTMLInputElement).value.toLowerCase();
+    console.log('Buscando productos con:', input);
+
+    if (!input) {
+        filteredProductos.value = [...cards.value];
+        return;
+    }
+
+    filteredProductos.value = cards.value.filter((producto) =>
+        (producto.name && producto.name.toLowerCase().includes(input)) ||
+        (producto.categoria && producto.categoria.toLowerCase().includes(input))
+    );
+
+    console.log('Resultado del filtro:', filteredProductos.value);
 };
+
 
 onMounted(() => {
     filteredProductos.value = [...cards.value];
@@ -36,7 +49,7 @@ onMounted(() => {
                     <div class="search-box">
                         
                         <input 
-                        @input="filtrar" 
+                        @input="filtrarProductos" 
                         type="text" 
                         id="searchInput" 
                         placeholder="Buscar..." 

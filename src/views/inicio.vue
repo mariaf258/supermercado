@@ -5,89 +5,88 @@ import Iconos from '@/components/iconos.vue'
 import { ref, onMounted } from 'vue'
 import { productoServicio } from '@/services/productos/productoServicio';
 import { Productos } from '@/utils/interfaces/interfaceProductos';
-import { filteredProductos } from '@/utils/buscador';
 
 const ProductoServicio = new productoServicio();
 
-// Estado para los productos
-const productosSupermercado = ref<Productos[]>([]);
-// Estado para los productos filtrados
+const productoSupermercado = ref<Productos[]>([]);
 const filteredProductos = ref<Productos[]>([]);
+const loading = ref(true);
 
-// Función para obtener los productos desde el servicio
 const obtenerDatos = async () => {
   try {
-    const productos: Productos[] = await ProductoServicio.obtenerProductos();
-    console.log('Productos obtenidos:', productos);
+    const productos = await ProductoServicio.obtenerProductos();
+    console.log("Productos obtenidos desde Firebase:", productos);
 
-    // Verificar que los productos están siendo obtenidos correctamente
     if (!productos || productos.length === 0) {
-      console.error('No se han obtenido productos.');
+      console.error("No se encontraron productos en Firebase.");
       return;
     }
 
-    // Aquí puedes realizar un filtrado si lo necesitas
-    const categoria = 'Alimentos'; // Modifica según el filtro que necesites
-    const productoSuper: Productos[] = productos.filter((product) => product.categoria === categoria);
+    const categoria = 'Alimentos'.toLowerCase();
+    productoSupermercado.value = productos.filter((product) => 
+      product.categoria.toLowerCase() === categoria
+    );
+    console.log(productoSupermercado);
+    
 
-    // Si no se encuentran productos para esa categoría, muestra un mensaje
-    if (productoSuper.length === 0) {
-      console.error('No se encontraron productos para la categoría:', categoria);
+    if (productoSupermercado.value.length === 0) {
+      console.error("No se encontraron productos para la categoría:", categoria);
     }
 
-    // Asignar los productos filtrados
-    productosSupermercado.value = productoSuper;
-    console.log('Productos filtrados:', productosSupermercado.value);
-
-    // Copiar los productos a filteredProductos para la visualización
-    filteredProductos.value = [...productosSupermercado.value];
+    filteredProductos.value = [...productoSupermercado.value];
   } catch (error) {
-    console.error('Error al obtener los productos:', error);
+    console.error("Error al obtener productos desde Firebase:", error);
   }
+  console.log(productoSupermercado.value);
+  
 };
+
 
 onMounted(() => {
   obtenerDatos();
 });
 </script>
 
-
 <template>
   <div id="app">
     <div class="page-wrapper">
       <HeaderPrincipal/>
-
-      <div class="row g-2">
-        <div class="col">
-          <div class="p-3">
-            <!-- Mostrar las cards de los productos filtrados -->
-            <div class="product-card" v-for="product in filteredProductos" :key="product.id" style="width: 18rem">
-              <article @click="expandImage(product.image)">
-                <div class="image-container">
-                  <!-- Imagen del producto -->
-                  <img :src="product.image" class="card-img-top" :alt="product.name" />
-                </div>
-                <div class="card-body">
-                  <div class="card-text">
-                    <!-- Nombre del producto -->
-                    <h1 class="product-name">{{ product.name }}</h1>
-                    <!-- Cantidad del producto -->
-                    <h3 class="product-amount">{{ product.amount }}</h3>
-                    <!-- Precio del producto -->
-                    <h2 class="product-price">Precio: {{ product.price }}</h2>
+      <div v-if="loading">Cargando productos...</div>
+      <div v-else>
+        <div class="row g-2">
+          <div class="col">
+            <div class="p-3">
+              <div 
+                class="product-card"
+                v-for="(product, index) in filteredProductos" 
+                :key="index"
+                style="width: 18rem"
+                :class="{ selected: item.selected }" 
+                v-bind:item="item as Productos"
+              >
+                <article>
+                  <div class="image-container">
+                    <img :src="product.image" class="card-img-top" :alt="product.name" />
                   </div>
-                  <Iconos/> <!-- Componente para los iconos adicionales -->
-                </div>
-              </article>
+                  <div class="card-body">
+                    <div class="card-text">
+                      <h1 class="product-name">{{ product.name }}</h1>
+                      <h3 class="product-amount">{{ product.amount }}</h3>
+                      <h2 class="product-price">Precio: {{ product.price }}</h2>
+                    </div>
+                    <Iconos/>
+                  </div>
+                </article>
+              </div>
             </div>
           </div>
         </div>
       </div>
-
       <FooterPrincipal/>
     </div>
   </div>
 </template>
+
 
 
 <style>

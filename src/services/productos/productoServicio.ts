@@ -7,14 +7,16 @@ const db = getFirestore(app)
 
 export class productoServicio {
 
-    async obtenerProductos() {
+    async obtenerProductos () : Promise<Producto[] >{
         try {
-          const response = await fetch('/api/productos'); // o la URL de tu API
-          const data = await response.json();
-          return data; // Asegúrate de que el formato de datos sea el esperado
+            const response = await getDocs(collection(db, 'productos'))
+            return  response.docs.map((registro) =>( {
+                id : registro.id,   
+                ...registro.data()
+            }))
+            
         } catch (error) {
-          console.error('Error al obtener productos:', error);
-          return [];
+            return [];
         }
     }
     
@@ -25,11 +27,11 @@ export class productoServicio {
                 price: producto.price,
                 amount: producto.amount,
                 category: producto.category,
-                image: producto.image ? producto.image.name : '', // Solo el nombre de la imagen
-                unit: producto.unit, // Guardar la unidad seleccionada
-                customUnit: producto.unit === 'otra' ? producto.customUnit : '', // Si la unidad es "otra", guardar la unidad personalizada
+                image: producto.image ? producto.image.name : '', 
+                unit: producto.unit, 
+                customUnit: producto.unit === 'otra' ? producto.customUnit : '', 
             });
-            return docRef.id; // Retorna el ID del documento creado
+            return docRef.id; 
             } catch (error) {
             console.error('Error al agregar el producto:', error);
             throw error;
