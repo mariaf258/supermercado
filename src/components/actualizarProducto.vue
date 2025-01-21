@@ -118,10 +118,27 @@ onMounted(() => {
                 </div>
             </main>
 
-            <select v-model="selectedProduct.category" class="form-select" aria-label="Seleccionar categoría">
+            <!-- <select v-model="selectedProduct.category" class="form-select" aria-label="Seleccionar categoría">
                 <option disabled value="">Seleccione una categoría</option>
                 <option v-for="categoria in categorias" :key="categoria.id_categoria" :value="categoria.name">
                     {{ categoria.name }}
+                </option>
+            </select> -->
+
+            <select class="form-select" 
+                v-model="selectedCard"
+                aria-label="Default select example">
+                <option disabled value="">Seleccione empleado</option>
+                <option
+                class="card-delete"
+                
+                v-for="card in cards"
+                :key="card.id"
+                :value="card"
+                @click="openUpdateForm(card)"
+                >
+                <h4>{{ card.name }} - </h4>
+                <p>{{ card.descripcion }}</p>
                 </option>
             </select>
 

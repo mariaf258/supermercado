@@ -9,7 +9,7 @@ import { Productos } from '@/utils/interfaces/interfaceProductos';
 const ProductoServicio = new productoServicio();
 
 const productoSupermercado = ref<Productos[]>([]);
-const filteredProductos = ref<Productos[]>([]);
+let filteredProductos = ref<Productos[]>([]);
 const loading = ref(true);
 
 const obtenerDatos = async () => {
@@ -19,6 +19,7 @@ const obtenerDatos = async () => {
 
     if (!productos || productos.length === 0) {
       console.error("No se encontraron productos en Firebase.");
+      loading.value = false; 
       return;
     }
 
@@ -26,8 +27,8 @@ const obtenerDatos = async () => {
     productoSupermercado.value = productos.filter((product) => 
       product.categoria.toLowerCase() === categoria
     );
+
     console.log(productoSupermercado);
-    
 
     if (productoSupermercado.value.length === 0) {
       console.error("No se encontraron productos para la categoría:", categoria);
@@ -36,15 +37,38 @@ const obtenerDatos = async () => {
     filteredProductos.value = [...productoSupermercado.value];
   } catch (error) {
     console.error("Error al obtener productos desde Firebase:", error);
+  } finally {
+    loading.value = false; 
   }
-  console.log(productoSupermercado.value);
-  
 };
 
-
 onMounted(() => {
-  obtenerDatos();
+  obtenerDatos().then(() => {
+    filteredProductos.value = [...productoSupermercado.value];
+
+  });
 });
+
+// let filteredEmpleado = ref<any[]>([]);
+
+// const filtrarProductos = (event: Event) => {
+//   const input = (event.target as HTMLInputElement).value.toLowerCase();
+//   console.log('Buscando productos con:', input);
+
+//   if (!input) {
+//     filteredEmpleado.value = [...empleadosModuloTalentoHumano.value];
+//     return;
+//   }
+
+//   filteredEmpleado.value = empleadosModuloTalentoHumano.value.filter((empleado) =>
+//     (empleado.name && empleado.name.toLowerCase().includes(input)) ||
+//     (empleado.etiqueta && empleado.etiqueta.toLowerCase().includes(input))
+//   );
+
+//   console.log('Resultados del filtro:', filteredEmpleado.value);
+// };
+
+
 </script>
 
 <template>
@@ -61,9 +85,8 @@ onMounted(() => {
                 v-for="(product, index) in filteredProductos" 
                 :key="index"
                 style="width: 18rem"
-                :class="{ selected: item.selected }" 
-                v-bind:item="item as Productos"
               >
+              <pre>{{ filteredProductos }}</pre>
                 <article>
                   <div class="image-container">
                     <img :src="product.image" class="card-img-top" :alt="product.name" />
@@ -86,6 +109,7 @@ onMounted(() => {
     </div>
   </div>
 </template>
+
 
 
 
