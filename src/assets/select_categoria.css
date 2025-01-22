@@ -1,0 +1,42 @@
+.p-3-select {
+    display: grid;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px 20px;
+    grid-template-columns: repeat(4, 1fr);
+    margin-top: -30%;
+}
+
+.card-body {
+    padding: 16px 0px 16px 16px;
+    text-align: center;
+    border-top: 2px solid #f96616;
+    background-color: rgb(249, 102, 22, 0.09);
+}
+
+.select_categoria {
+    border-radius: 5px;
+    border: 2px solid #f96616;
+    box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+    /* margin-bottom: 20px; */
+    margin-top: -26%;
+    margin-left: 3%;
+    width: 20%;
+    position: absolute;
+}
+
+.select_categoria:focus {
+    border-color: white; 
+    outline: none;
+    box-shadow: 0 0 0 2px #f96616;
+}
+
+.icono-update img {
+    width: 20px;
+    height: 20px;
+    margin-left: 70%;
+    cursor: pointer;
+    margin-bottom: -5px;
+}

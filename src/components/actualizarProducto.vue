@@ -1,12 +1,26 @@
 <script setup lang="ts">
 import Header from '@/components/header.vue'
 import Footer from '@/components/footer.vue'
+import BuscadorSubVista from '@/components/buscador/buscador-subVista.vue'
+import Select_categoria from '@/components/select_categoria.vue'
 import ProductoDefault from '@/utils/interfaces/interfaceProductos';
 import { productoServicio } from '@/services/productos/productoServicio';
 import { alertaCamposProducto } from '@/utils/alertaCampos';
-
+import { filteredProductos, filtrarProductos } from '@/utils/buscador';
 import { ref, reactive, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
+import { cards } from '@/utils/productos';
+
+const inputValue = ref('');
+
+const filtrar = (event: Event) => {
+    inputValue.value = (event.target as HTMLInputElement).value;
+    filtrarProductos(cards.value, inputValue.value);
+};
+
+onMounted(() => {
+    filteredProductos.value = [...cards.value];
+});
 
 const router = useRouter();
 const ProductoServicio = new productoServicio();
@@ -14,8 +28,8 @@ const ProductoServicio = new productoServicio();
 const selectedProduct = reactive<ProductoDefault>({
     id: '', 
     name: '',
-    price: 0,
-    amount: 0,
+    price: '',
+    amount: '',
     category: '',
     image: null,
     unit: '',
@@ -106,102 +120,42 @@ onMounted(() => {
         <div class="page-wrapper">
             <div class="">
 
-            <Header />
+            <Header/>
             <main class="main">
                 <div class="button-container">
                     <button class="expand-button" @click="router.go(-1)">
                         <img src="../../public/back-white.png" alt="Retroceder" />
                     </button>
                 </div>
-                <div class="title-saved">
+                <div class="title-update">
                     <h2>Actualizar Producto</h2>
                 </div>
+                
+                <div class="search-container-2">
+                <div class="search-box-2">
+                    
+                    <input 
+                    @input="filtrar" 
+                    type="text" 
+                    id="searchInput-2" 
+                    placeholder="Buscar..." 
+                    />
+                    <img src="../../../public/search.png" alt="search" class="search-icon-2" />
+                </div>
+                <div id="results" class="results-2">
+                    <ul>
+                        <li v-for="producto in filteredProductos" :key="producto.id">
+                            {{ producto.name }} - {{ producto.description }}
+                        </li>
+                    </ul>
+                </div>
+            </div>   
             </main>
 
-            <!-- <select v-model="selectedProduct.category" class="form-select" aria-label="Seleccionar categoría">
-                <option disabled value="">Seleccione una categoría</option>
-                <option v-for="categoria in categorias" :key="categoria.id_categoria" :value="categoria.name">
-                    {{ categoria.name }}
-                </option>
-            </select> -->
+            <Select_categoria/>
 
-            <select class="form-select" 
-                v-model="selectedCard"
-                aria-label="Default select example">
-                <option disabled value="">Seleccione empleado</option>
-                <option
-                class="card-delete"
-                
-                v-for="card in cards"
-                :key="card.id"
-                :value="card"
-                @click="openUpdateForm(card)"
-                >
-                <h4>{{ card.name }} - </h4>
-                <p>{{ card.descripcion }}</p>
-                </option>
-            </select>
-
-            <section class="section-producto">
-                <div class="formulario">
-                    <form class="form-producto" @submit.prevent="crearProducto()">
-                        <div class="form-row">
-                            <div class="column">
-                                <div class="form-group">
-                                    <input type="name" v-model="selectedProduct.name" placeholder="" />
-                                    <label class="form-label">Nombre del Producto</label>
-                                </div>
-
-                                <div class="form-group">
-                                    <input type="post" v-model="selectedProduct.price" placeholder="" />
-                                    <label class="form-label">Precio del Producto</label>
-                                </div>
-
-                                <div class="form-group">
-                                    <input type="etiqueta" v-model="selectedProduct.amount" placeholder="" />
-                                    <label class="form-label">Cantidad del Producto</label>
-                                </div>
-
-                                <div class="form-group">
-                                    <!-- Cambié 'datos.unit' por 'selectedProduct.unit' -->
-                                    <label class="form-label" v-show="!selectedProduct.unit" for="unidad">Unidad de Medida</label>
-                                    <select v-model="selectedProduct.unit" id="unidad" class="unit-select">
-                                        <option value="unidad" disabled>Selecciona una opción</option>
-                                        <option value="kilo">Kg</option>
-                                        <option value="gramo">gr</option>
-                                        <option value="litro">Litro</option>
-                                        <option value="ml">ml</option>
-                                        <option value="unidad">Unidad/es</option>
-                                        <option value="otra">Otra</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="column">
-                                <div class="image-uploader">
-                                    <div class="image-preview" v-if="imagePreview">
-                                        <img :src="imagePreview" alt="Previsualización de la imagen" />
-                                    </div>
-                                    <div class="image-placeholder" v-else>
-                                        <img src="../../public/photo-off.png" alt="Sin imagen seleccionada" />
-                                    </div>
-                                    <div class="form-photo">
-                                        <input type="file" @change="handleFileUpload" />
-                                        <label class="form-label">Imagen del Producto</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-
-                    <div class="buttons">
-                        <button class="btn-update btn-primary-add" type="submit" @click="actualizarProducto(selectedProduct.id, selectedProduct)">
-                            Actualizar
-                        </button>
-                    </div>
-                </div>
-            </section>
-
+            
+            
             <Footer />
             </div>
         </div>
@@ -211,5 +165,5 @@ onMounted(() => {
 
 
 <style>
-@import '/src/assets/agregarProducto.css'
+@import '/src/assets/actualizarProducto.css'
 </style>

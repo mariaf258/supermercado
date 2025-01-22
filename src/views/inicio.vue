@@ -2,121 +2,73 @@
 import HeaderPrincipal from '@/components/headerPrincipal.vue'
 import FooterPrincipal from '@/components/footerPrincipal.vue'
 import Iconos from '@/components/iconos.vue'
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 import { productoServicio } from '@/services/productos/productoServicio';
 import { Productos } from '@/utils/interfaces/interfaceProductos';
 
+
+let isMenuDropdownVisible = false;
+let isUserDropdownVisible = false;
+
+function toggleMenuDropdown() {
+  isMenuDropdownVisible = !isMenuDropdownVisible;
+}
+
+function toggleUserDropdown() {
+  isUserDropdownVisible = !isUserDropdownVisible;
+}
+
 const ProductoServicio = new productoServicio();
 
-const productoSupermercado = ref<Productos[]>([]);
-let filteredProductos = ref<Productos[]>([]);
+const productoSupermercado = ref<Productos[]>([]); 
+const filteredProductos = ref<Productos[]>([]); 
 const loading = ref(true);
 
 const obtenerDatos = async () => {
   try {
     const productos = await ProductoServicio.obtenerProductos();
     console.log("Productos obtenidos desde Firebase:", productos);
+    console.log("Producto:", productos);
+    console.log("Categoría:", productos.category);
 
     if (!productos || productos.length === 0) {
       console.error("No se encontraron productos en Firebase.");
-      loading.value = false; 
+      loading.value = false;
       return;
     }
 
-    const categoria = 'Alimentos'.toLowerCase();
-    productoSupermercado.value = productos.filter((product) => 
-      product.categoria.toLowerCase() === categoria
-    );
-
-    console.log(productoSupermercado);
-
-    if (productoSupermercado.value.length === 0) {
-      console.error("No se encontraron productos para la categoría:", categoria);
-    }
-
-    filteredProductos.value = [...productoSupermercado.value];
+    productoSupermercado.value = productos; 
+    filteredProductos.value = [...productos]; 
   } catch (error) {
     console.error("Error al obtener productos desde Firebase:", error);
   } finally {
-    loading.value = false; 
+    loading.value = false;
   }
 };
-console.log("Estructura de productos filtrados:", filteredProductos.value);
-console.log("Productos filtrados a renderizar:", productoSupermercado.value);
 
-import { watch } from 'vue';
+const filtrarProductosPorCategoria = (categoria: string) => {
+  console.log("Filtrando productos con categoría:", categoria);
 
-watch(filteredProductos, (newValue) => {
-  console.log("Nuevo valor de productos filtrados:", newValue);
-});
-
-console.log("Productos iniciales:", productoSupermercado.value);
-console.log("Productos filtrados:", filteredProductos.value);
-
-
-const productos = await ProductoServicio.obtenerProductos();
-console.log("Productos obtenidos desde Firebase:", productos);
-
-
-productos.forEach((product) => {
-  console.log("Producto:", product);
-  console.log("Categoría:", product.categoria);
-});
-
-
-const categorias = "alimentos"; // Cambia a minúsculas
-productoSupermercado.value = productos.filter((product) => {
-  return product.categoria?.toLowerCase() === categorias;
-});
-
-
-productoSupermercado.value = productos.filter((product) => {
-  if (!product.categoria) {
-    console.warn("Producto sin categoría:", product);
-    return false; // Excluye productos sin categoría
+  if (!categoria) {
+    filteredProductos.value = [...productoSupermercado.value]; 
+    return;
   }
-  return product.categoria.toLowerCase() === categoria;
-});
 
+  filteredProductos.value = productoSupermercado.value.filter((producto) =>
+    producto.category?.toLowerCase() === categoria.toLowerCase()
+  );
 
-productos.forEach((product) => {
-  if (!product.categoria) {
-    product.categoria = "General"; // O la categoría que prefieras
-  }
-});
-
-const categoria = "alimentos";
-productoSupermercado.value = productos.filter((product) =>
-  product.categoria.toLowerCase() === categoria
-);
-
-
+  console.log("Resultados del filtro por categoría:", filteredProductos.value);
+};
 
 onMounted(() => {
-  obtenerDatos().then(() => {
-    filteredProductos.value = [...productoSupermercado.value];
-
-  });
+  obtenerDatos();
 });
 
-// let filteredEmpleado = ref<any[]>([]);
+watch(filteredProductos, (newValue) => {
+  console.log("Nuevo valor de productos filtrados:", [...newValue]); 
+});
 
-// const filtrarProductos = (event: Event) => {
-//   const input = (event.target as HTMLInputElement).value.toLowerCase();
-//   console.log('Buscando productos con:', input);
-
-//   if (!input) {
-//     filteredEmpleado.value = [...empleadosModuloTalentoHumano.value];
-//     return;
-//   }
-
-//   filteredEmpleado.value = empleadosModuloTalentoHumano.value.filter((empleado) =>
-//     (empleado.name && empleado.name.toLowerCase().includes(input)) ||
-//     (empleado.etiqueta && empleado.etiqueta.toLowerCase().includes(input))
-//   );
-
-//   console.log('Resultados del filtro:', filteredEmpleado.value);
-// };
 
 
 </script>
@@ -127,25 +79,38 @@ onMounted(() => {
       <HeaderPrincipal/>
       <div v-if="loading">Cargando productos...</div>
       <div v-else>
+        
         <div class="row g-2">
+
+          <!-- <h2 class="selected-category">{{ categoriaSeleccionada }}</h2> -->
+          
           <div class="col">
-            <div class="p-3">
+            <select @change="(event) => filtrarProductosPorCategoria(event.target.value)">
+              <option value="">Todas las categorías</option>
+              <option value="alimentos">Alimentos</option>
+              <option value="productos de aseo personal">Productos de aseo personal</option>
+              <option value="productos de aseo del hogar">Productos de aseo del hogar</option>
+            </select>
+            
+              <div class="p-3">
               <div 
                 class="product-card"
                 v-for="product in filteredProductos" 
                 :key="product.id"
                 style="width: 18rem"
               >
-              <pre>{{ filteredProductos }}</pre>
+              <!-- <pre>{{ filteredProductos }}</pre> -->
               <article v-if="product.image && product.name && product.price">
                 <div class="image-container">
                   <img :src="product.image" class="card-img-top" :alt="product.name" />
                 </div>
                 <div class="card-body">
                   <h1 class="product-name">{{ product.name }}</h1>
-                  <h3 class="product-amount">{{ product.amount }}</h3>
+                  <h3 class="product-amount">{{ product.amount }} {{ product.unit }}</h3>
                   <h2 class="product-price">Precio: {{ product.price }}</h2>
-                </div>
+                <Iconos/>
+              </div>
+                
               </article>
 
               </div>

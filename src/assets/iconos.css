@@ -1,4 +1,3 @@
-
 .options {
     display: flex;
     justify-content: flex-end;
@@ -17,11 +16,9 @@
 .options button {
     background-color: transparent;
     border: transparent;
-
 }
 
 .options button img {
     background-color: transparent;
     border: transparent;
-    
 }

@@ -1,4 +1,4 @@
-s<script setup lang="ts">
+<script setup lang="ts">
 import { filteredProductos, filtrarProductos } from '@/utils/buscador';
 import { cards } from '@/utils/productos';
 import { ref, onMounted } from 'vue'

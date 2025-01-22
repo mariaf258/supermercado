@@ -13,6 +13,7 @@ import inventario from '@/views/inventario.vue'
 import agregarProducto from '@/components/agregarProducto.vue'
 import actualizarProducto from '@/components/actualizarProducto.vue'
 import eliminarProducto from '@/components/eliminarProducto.vue'
+import form_actualizar from '@/components/form_actualizar.vue'
 
 
 const router = createRouter({
@@ -87,6 +88,11 @@ const router = createRouter({
       path: '/eliminarProducto',
       name: 'eliminarProducto',
       component: eliminarProducto
+    },
+    {
+      path: '/form_actualizar',
+      name: 'form_actualizar',
+      component: form_actualizar
     },
     {
       path: '/about',

@@ -37,6 +37,25 @@
     border: 4px solid rgb(249, 101, 21, 0.8);
 }
 
+.col select {
+    border-radius: 5px;
+    border: 2px solid #f96616;
+    box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    margin-left: 40%;
+    width: 20%;
+}
+
+.col select:focus {
+    border-color: white; 
+    outline: none;
+    box-shadow: 0 0 0 2px #f96616;
+}
+
+
 .p-3 {
     display: grid;
     justify-content: flex-end;

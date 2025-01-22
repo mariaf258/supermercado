@@ -89,12 +89,20 @@ function handleFileUpload(event: Event) {
                     </select>
                     </div>
 
-                
-
                     <div class="form-group">
-                    <input type="text" v-model="datos.category" placeholder="" />
-                    <label class="form-label">Categoría del Producto</label>
+                    <label for="category-selector" class="form-label">Categoría del Producto</label>
+                    <select 
+                        id="category-selector" 
+                        v-model="datos.category" 
+                        class="form-select-saved"
+                    >
+                        <option value="" disabled>Seleccione una categoría</option>
+                        <option value="alimentos">Alimentos</option>
+                        <option value="productos de aseo personal">Productos de Aseo Personal</option>
+                        <option value="productos de aseo del hogar">Productos de Aseo del Hogar</option>
+                    </select>
                     </div>
+
                 </div>
 
                 <div class="column">
@@ -112,7 +120,7 @@ function handleFileUpload(event: Event) {
                     </div>
                 </div>
                 </div>
-                <div class="buttons">
+                <div class="buttons-add">
                 <button class="btn-add btn-primary-add" type="submit">Agregar</button>
                 </div>
             </form>
