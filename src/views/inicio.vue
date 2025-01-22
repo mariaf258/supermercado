@@ -41,6 +41,56 @@ const obtenerDatos = async () => {
     loading.value = false; 
   }
 };
+console.log("Estructura de productos filtrados:", filteredProductos.value);
+console.log("Productos filtrados a renderizar:", productoSupermercado.value);
+
+import { watch } from 'vue';
+
+watch(filteredProductos, (newValue) => {
+  console.log("Nuevo valor de productos filtrados:", newValue);
+});
+
+console.log("Productos iniciales:", productoSupermercado.value);
+console.log("Productos filtrados:", filteredProductos.value);
+
+
+const productos = await ProductoServicio.obtenerProductos();
+console.log("Productos obtenidos desde Firebase:", productos);
+
+
+productos.forEach((product) => {
+  console.log("Producto:", product);
+  console.log("Categoría:", product.categoria);
+});
+
+
+const categorias = "alimentos"; // Cambia a minúsculas
+productoSupermercado.value = productos.filter((product) => {
+  return product.categoria?.toLowerCase() === categorias;
+});
+
+
+productoSupermercado.value = productos.filter((product) => {
+  if (!product.categoria) {
+    console.warn("Producto sin categoría:", product);
+    return false; // Excluye productos sin categoría
+  }
+  return product.categoria.toLowerCase() === categoria;
+});
+
+
+productos.forEach((product) => {
+  if (!product.categoria) {
+    product.categoria = "General"; // O la categoría que prefieras
+  }
+});
+
+const categoria = "alimentos";
+productoSupermercado.value = productos.filter((product) =>
+  product.categoria.toLowerCase() === categoria
+);
+
+
 
 onMounted(() => {
   obtenerDatos().then(() => {
@@ -82,24 +132,22 @@ onMounted(() => {
             <div class="p-3">
               <div 
                 class="product-card"
-                v-for="(product, index) in filteredProductos" 
-                :key="index"
+                v-for="product in filteredProductos" 
+                :key="product.id"
                 style="width: 18rem"
               >
               <pre>{{ filteredProductos }}</pre>
-                <article>
-                  <div class="image-container">
-                    <img :src="product.image" class="card-img-top" :alt="product.name" />
-                  </div>
-                  <div class="card-body">
-                    <div class="card-text">
-                      <h1 class="product-name">{{ product.name }}</h1>
-                      <h3 class="product-amount">{{ product.amount }}</h3>
-                      <h2 class="product-price">Precio: {{ product.price }}</h2>
-                    </div>
-                    <Iconos/>
-                  </div>
-                </article>
+              <article v-if="product.image && product.name && product.price">
+                <div class="image-container">
+                  <img :src="product.image" class="card-img-top" :alt="product.name" />
+                </div>
+                <div class="card-body">
+                  <h1 class="product-name">{{ product.name }}</h1>
+                  <h3 class="product-amount">{{ product.amount }}</h3>
+                  <h2 class="product-price">Precio: {{ product.price }}</h2>
+                </div>
+              </article>
+
               </div>
             </div>
           </div>

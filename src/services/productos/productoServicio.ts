@@ -7,18 +7,16 @@ const db = getFirestore(app)
 
 export class productoServicio {
 
-    async obtenerProductos () : Promise<Producto[] >{
-        try {
-            const response = await getDocs(collection(db, 'productos'))
-            return  response.docs.map((registro) =>( {
-                id : registro.id,   
-                ...registro.data()
-            }))
-            
-        } catch (error) {
-            return [];
-        }
+    async obtenerProductos() {
+        const db = getFirestore();
+        const productosSnapshot = await getDocs(collection(db, "productos"));
+        return productosSnapshot.docs.map((doc) => {
+            const data = doc.data();
+            console.log("Producto mapeado:", data); 
+            return { id: doc.id, ...data };
+        });
     }
+    
     
     async crearProducto(producto: ProductoDefault) {
         try {

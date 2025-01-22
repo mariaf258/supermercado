@@ -35,18 +35,19 @@ export class categoriaServicio {
     }
 
     async actualizarCategoria(id: string, nuevosDatos: object): Promise<boolean> {
-        try {
-            if (!id || Object.keys(nuevosDatos).length === 0) {
-                throw new Error('Id inválido o datos vacios.');
+            const db = getFirestore();
+            const productosSnapshot = await getDocs(collection(db, "productos"));
+            
+            productosSnapshot.forEach(async (productoDoc) => {
+                const producto = productoDoc.data();
+                if (!producto.categoria) {
+                    console.log(`Actualizando producto ${productoDoc.id}...`);
+                await updateDoc(doc(db, "productos", productoDoc.id), {
+                  categoria: "General" // O asigna la categoría que prefieras
+                });
             }
-            const docRef = await doc(collection(db, 'Categorias'), id);
-            await updateDoc(docRef, nuevosDatos);
-            console.log('Categoria actualizada correctamente:', id);
-            return true;
-        } catch (error) {
-            console.log('Error al actualizar categoria:', error);
-            return false;
-        }
+        });
+        
     }
 
     async eliminarCategoria(id: string): Promise<boolean> {
