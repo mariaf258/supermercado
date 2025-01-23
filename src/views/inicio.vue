@@ -82,7 +82,6 @@ watch(filteredProductos, (newValue) => {
         
         <div class="row g-2">
 
-          <!-- <h2 class="selected-category">{{ categoriaSeleccionada }}</h2> -->
           
           <div class="col">
             <select @change="(event) => filtrarProductosPorCategoria(event.target.value)">
@@ -99,7 +98,6 @@ watch(filteredProductos, (newValue) => {
                 :key="product.id"
                 style="width: 18rem"
               >
-              <!-- <pre>{{ filteredProductos }}</pre> -->
               <article v-if="product.image && product.name && product.price">
                 <div class="image-container">
                   <img :src="product.image" class="card-img-top" :alt="product.name" />

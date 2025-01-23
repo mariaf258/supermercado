@@ -195,8 +195,8 @@ form img {
   color: white;
 }
 
-.btn {
-  width: 100%;
+.btn-login {
+  width: 50%;
   height: 40px;
   background: #f96616;
   outline: none;
@@ -208,6 +208,7 @@ form img {
   justify-content: center;
   margin-bottom: 10px;
   margin-top: 20px;
+  margin-left: 27%;
 }
 
 .btn span {
@@ -215,6 +216,8 @@ form img {
   /* font-family: poppins; */
   font-size: 16px;
 }
+
+
 
 .text {
   width: 100%;

@@ -2,7 +2,7 @@
 import Header from '@/components/header.vue'
 import Footer from '@/components/footer.vue'
 import BuscadorSubVista from '@/components/buscador/buscador-subVista.vue'
-import Select_categoria from '@/components/select_categoria.vue'
+import SelectCategoria_actualizar from '@/components/selectCategoria_actualizar.vue'
 import ProductoDefault from '@/utils/interfaces/interfaceProductos';
 import { productoServicio } from '@/services/productos/productoServicio';
 import { alertaCamposProducto } from '@/utils/alertaCampos';
@@ -71,14 +71,39 @@ const crearProducto = async () => {
 };
 
 // Actualizar producto
-const actualizarProducto = async (id: string, productoActualizado: ProductoDefault) => {
-    try {
-        const respuestaActualizar = await productoServicio.actualizarProducto(id, productoActualizado);
-        console.log(respuestaActualizar);
-    } catch (error) {
-        console.error('Error al actualizar el producto:', error);
-    }
-};
+// const actualizarProducto = async (id: string, productoActualizado: ProductoDefault) => {
+//     if (!selectedProduct.value || !selectedProduct.value.id){
+//         console.error('Error al actualizar el producto:', error);
+//         return;
+//     }
+    
+//     console.log(selectedProduct.value);
+    
+//     try {
+//         const respuestaActualizar = await productoServicio.actualizarProducto(id, productoActualizado);
+//         console.log(respuestaActualizar);
+//     } catch (error) {
+//         console.error('Error al actualizar el producto:', error);
+    
+
+//     if (respuestaActualizar) {
+//         const index = cards.value.findIndex(
+//             (card) => card.id === selectedProduct.value!.id);
+        
+//         if (index !== -1) {
+//             cards.value[index] = { ...selectedProduct.value }
+//             alert('Producto actualizado correctamente.')
+//         } else {
+//             alert('No se encontro producto para actualizar.')
+//         }
+//         selectedProduct.value = null;
+//     } else {
+//         console.error('Error al actualizar en Firebase:');
+//     }
+// } catch (error) {
+//     console.error('Error durante la actualización:', error);
+// }
+// };
 
 // Eliminar producto
 const eliminarProducto = async (id: string) => {
@@ -152,7 +177,7 @@ onMounted(() => {
             </div>   
             </main>
 
-            <Select_categoria/>
+            <SelectCategoria_actualizar/>
 
             
             

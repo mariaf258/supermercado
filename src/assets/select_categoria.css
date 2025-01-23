@@ -7,11 +7,14 @@
     margin-top: -30%;
 }
 
-.card-body {
+.card-body-1 {
     padding: 16px 0px 16px 16px;
-    text-align: center;
+    /* text-align: center; */
     border-top: 2px solid #f96616;
     background-color: rgb(249, 102, 22, 0.09);
+    font-size: 20px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: #2C3E50;
 }
 
 .select_categoria {
@@ -36,7 +39,14 @@
 .icono-update img {
     width: 20px;
     height: 20px;
-    margin-left: 70%;
+    margin-left: 85%;
     cursor: pointer;
     margin-bottom: -5px;
+}
+
+.product-name {
+    text-transform: uppercase;
+    font-size: 20px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: #2C3E50;
 }

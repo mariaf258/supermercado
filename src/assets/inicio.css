@@ -84,6 +84,19 @@
     background-color: rgb(249, 102, 22, 0.09);
 }
 
+.product-name {
+    text-align: center;
+}
+
+.product-amount {
+    text-align: left;
+    font-weight: bold;
+}
+
+.product-price {
+    text-align: left;
+}
+
 .card-text h1 {
     font-size: 20px;
     margin-bottom: 10px;

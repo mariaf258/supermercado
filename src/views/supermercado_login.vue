@@ -110,13 +110,13 @@ export default defineComponent({
                   </span>
                 </span>
               </span>
-              <button type="submit" class="btn">
-                <span>INICIAR SESIÓN</span>
-                <div class="dots">
+              <button type="submit" class="btn-login">
+                <span class="button-login">INICIAR SESIÓN</span>
+                <!-- <div class="dots">
                   <div class="dot" style="--delay: 0s"></div>
                   <div class="dot" style="--delay: 0.25s"></div>
                   <div class="dot" style="--delay: 0.5s"></div>
-                </div>
+                </div> -->
               </button>
               <div class="text">
                 ¿Nuevo usuario? Crear una cuenta <a href="#">Registrarse</a>

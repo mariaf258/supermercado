@@ -1,156 +1,152 @@
 <script setup lang="ts">
 import Header from '@/components/header.vue'
 import Footer from '@/components/footer.vue'
+import BuscadorSubVista from '@/components/buscador/buscador-subVista.vue'
+import SelectCategoria_eliminar from '@/components/selectCategoria_eliminar.vue'
 import ProductoDefault from '@/utils/interfaces/interfaceProductos';
-import {productoServicio} from '@/services/productos/productoServicio';
-import {alertaCamposProducto} from '@/utils/alertaCampos';
-import { ref, onMounted } from 'vue';
-
-
+import { productoServicio } from '@/services/productos/productoServicio';
+import { alertaCamposProducto } from '@/utils/alertaCampos';
+import { filteredProductos, filtrarProductos } from '@/utils/buscador';
+import { ref, reactive, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
+import { cards } from '@/utils/productos';
 
-const router  = useRouter()
-const datos = new ProductoDefault();
+const inputValue = ref('');
 
-
-
-const servicioProductos = new productoServicio();
-
-const Product = ref<ProductoDefault[]>([]);
-const selectedProduct = ref<ProductoDefault | null>(null);
-
-const filteredProducts = () => {
-    const productosFiltrados =  servicioProductos.filtrarProductosPorCategoria(Product.value)
-    Product.value = productosFiltrados;
-
+const filtrar = (event: Event) => {
+    inputValue.value = (event.target as HTMLInputElement).value;
+    filtrarProductos(cards.value, inputValue.value);
 };
 
-
 onMounted(() => {
-    obtenerProductos();
+    filteredProductos.value = [...cards.value];
+});
+
+const router = useRouter();
+const ProductoServicio = new productoServicio();
+
+const selectedProduct = reactive<ProductoDefault>({
+    id: '', 
+    name: '',
+    price: '',
+    amount: '',
+    category: '',
+    image: null,
+    unit: '',
+    customUnit: '',
 
 });
 
+const imagePreview = ref('');
 
+const Product = ref<ProductoDefault[]>([]);
+
+const categorias = ref([
+    { id_categoria: '1', name: 'Alimentos' },
+    { id_categoria: '2', name: 'Productos de aseo personal' },
+    { id_categoria: '3', name: 'Productos de aseo del hogar' },
+]);
+
+// Obtener productos al montar el componente
 const obtenerProductos = async () => {
-    const respuestaObtener = await productoServicio.obtenerProductos();
-    if (respuestaObtener) {
-        Product.value = respuestaObtener;
-        console.log(Product.value);
+    try {
+        Product.value = await productoServicio.obtenerProductos();
+    } catch (error) {
+        console.log('Error al obtener productos:', error);
     }
-    filteredProducts();
 };
 
-// Abre formulario con datos de una card
-const openUpdateForm = (Product: ProductoDefault) => {
-    console.log(Product);
-    
-};
 
-// Eliminar 
-const eliminarProducto = async (id: string | undefined) => {
-    if (!id) {
-        alert('No se puede eliminar: id no válido.');
-        return;
-    }
 
-    const confirmacion = confirm('¿Estás seguro de que deseas eliminar este producto?');
-    if (!confirmacion) return;
-
-    console.log('id a eliminar:', id); 
-    const respuestaEliminar = await productoServicio.eliminarProducto(id);
-
+// Eliminar producto
+const eliminarProducto = async (id: string) => {
+    try {
+        const respuestaEliminar = await productoServicio.eliminarProducto(id);
     if (!respuestaEliminar) {
-        const index = Product.value.findIndex((Product) => Product.id === id);
+        const index = cards.value.findIndex((card) => card.id === id);
         if (index !== -1) {
-            Product.value.splice(index, 1);
+            cards.value.splice(index, 1);
         }
-        alert('Error al eliminar el producto.');
+        alert('Error al eliminar el empleado.');
     } else {
-        alert('Producto eliminado correctamente.');
+        alert('Empleado eliminado correctamente.');
     }
 };
 
+// Manejo de carga de imágenes
+function handleFileUpload(event: Event) {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if (file) {
+        selectedProduct.image = file; 
+        imagePreview.value = URL.createObjectURL(file);
+    }
+}
 
-const cancelUpdate = () => {
-    selectedProduct.value = null;
+
+const openUpdateForm = (product: ProductoDefault) => {
+    Object.assign(selectedProduct, product); 
+    if (!product.image) {
+        imagePreview.value = ''; 
+    } else {
+        imagePreview.value = URL.createObjectURL(product.image); 
+    }
 };
 
+onMounted(() => {
+    obtenerProductos();
+});
 </script>
+
 
 <template>
     <div id="app">
-    <div class="page-wrapper">
-    <div class="">
-        
-        <Header/>
-        <main class="main">
-        <div class="button-container">
-            <button class="expand-button">
-            <img src="../../public/back-white.png" alt="" @click="router.go(-1)"/>
-            </button>
-        </div>
-        <div class="title-saved">
-            <h2>Eliminar Producto</h2>
-        </div>
+        <div class="page-wrapper">
+            <div class="">
 
-        <select class="form-select" 
-            v-model="selectedProduct"
-            aria-label="Default select example">
-            <option disabled value="Seleccione Categoria">Seleccione Categoria</option>
-            <option
-            class="card-delete"
-            v-for="card in Product"
-            :key="card.id"
-            :value="card"
-            @click="openUpdateForm(card)"
-            >
-            <h4>{{ card.name }} - </h4>
-            <p>{{ card.category }}</p>
-            </option>
-        </select>
-
-            <div class="search_container_1">
-                <div class="search_box_1">
+            <Header/>
+            <main class="main">
+                <div class="button-container">
+                    <button class="expand-button" @click="router.go(-1)">
+                        <img src="../../public/back-white.png" alt="Retroceder" />
+                    </button>
+                </div>
+                <div class="title-update">
+                    <h2>Eliminar Producto</h2>
+                </div>
+                
+                <div class="search-container-2">
+                <div class="search-box-2">
+                    
                     <input 
                     @input="filtrar" 
                     type="text" 
-                    id="searchInput_1" 
+                    id="searchInput-2" 
                     placeholder="Buscar..." 
                     />
-                        <img src="../../public/search.png" alt="search" class="search_icon_1" />
+                    <img src="../../../public/search.png" alt="search" class="search-icon-2" />
                 </div>
-                <div id="results" class="results_1">
+                <div id="results" class="results-2">
                     <ul>
                         <li v-for="producto in filteredProductos" :key="producto.id">
                             {{ producto.name }} - {{ producto.description }}
                         </li>
                     </ul>
                 </div>
+            </div>   
+            </main>
+
+            <SelectCategoria_eliminar/>
+
+            
+            
+            <Footer />
             </div>
-        </main>
-
-        <section v-if="selectedProduct" class="section-delete">
-                <div class="formulario">
-                
-                    <div class="card-body">
-                        <div class="card-text">
-                            <h1 class="product-name">{{ product.name }}</h1>
-                            <h3 class="product-amount">{{ product.amount }}</h3>
-                            <h2 class="product-price">Precio: {{ product.price }}</h2>
-                        </div>
-                        <img src="../../public/trash-color.png" alt="">
-                    </div>
-                </div>
-            </section>
-
-            <Footer/>
-
-        </div>
         </div>
     </div>
 </template>
 
+
+
 <style>
-@import '/src/assets/eliminarProducto.css'
+@import '/src/assets/actualizarProducto.css'
 </style>

@@ -4,12 +4,12 @@ import { ref, onMounted, watch } from 'vue'
 import { productoServicio } from '@/services/productos/productoServicio';
 import { Productos } from '@/utils/interfaces/interfaceProductos';
 
-
 const ProductoServicio = new productoServicio();
 
 const productoSupermercado = ref<Productos[]>([]); 
 const filteredProductos = ref<Productos[]>([]); 
 const loading = ref(true);
+const imagePreview = ref('');
 
 const obtenerDatos = async () => {
     try {
@@ -55,6 +55,16 @@ onMounted(() => {
 watch(filteredProductos, (newValue) => {
     console.log("Nuevo valor de productos filtrados:", [...newValue]); 
 });
+
+const openUpdateForm = (product: ProductoDefault) => {
+    Object.assign(selectedProduct, product);
+    if (!product.image) {
+        imagePreview.value = '';
+    } else {
+        imagePreview.value = product.image;
+    }
+};
+
 </script>
 
 <template>
@@ -77,14 +87,14 @@ watch(filteredProductos, (newValue) => {
                 <div class="image-container">
                     <img :src="product.image" class="card-img-top" :alt="product.name" />
                 </div>
-                <div class="card-body">
+                <div class="card-body-1">
                     <h1 class="product-name">{{ product.name }}</h1>
                     <h3 class="product-amount">{{ product.amount }} {{ product.unit }}</h3>
                     <h2 class="product-price">Precio: {{ product.price }}</h2>
                     
                     <div class="icono-update">
-                        <router-link to="/form_actualizar">
-                            <img src="../../public/pencil.png" alt="pencil" />
+                        <router-link to="/papelera" @click.native="openUpdateForm(product)">
+                            <img src="../../public/trash-color.png" alt="trash" />
                         </router-link>
                         
                     </div>

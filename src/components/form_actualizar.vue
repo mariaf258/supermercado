@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Header from '@/components/header.vue'
 import Footer from '@/components/footer.vue'
-import Select_categoria from '@/components/select_categoria.vue'
+import Select_categoria from '@/components/selectCategoria_actualizar.vue'
 import ProductoDefault from '@/utils/interfaces/interfaceProductos';
 import { productoServicio } from '@/services/productos/productoServicio';
 import { alertaCamposProducto } from '@/utils/alertaCampos';
@@ -13,15 +13,6 @@ const router = useRouter();
 const ProductoServicio = new productoServicio();
 
 const selectedProduct = reactive<ProductoDefault>({
-    id: '', 
-    name: '',
-    price: '',
-    amount: '',
-    category: '',
-    image: null,
-    unit: '',
-    customUnit: '',
-
 });
 
 const imagePreview = ref('');
@@ -58,10 +49,20 @@ const crearProducto = async () => {
 };
 
 // Actualizar producto
-const actualizarProducto = async (id: string, productoActualizado: ProductoDefault) => {
+const actualizarProducto = async () => {
     try {
-        const respuestaActualizar = await productoServicio.actualizarProducto(id, productoActualizado);
-        console.log(respuestaActualizar);
+        if (!selectedCard.value || !selectedCard.value.id) {
+            console.error('No se encontró un ID válido para actualizar.');
+            return;
+        }
+        const respuestaActualizar = await ProductoServicio.actualizarProducto(id, productoActualizado);
+        console.log('Producto actualizado:', respuestaActualizar);
+
+        const index = Product.value.findIndex((product) => product.id === id);
+        if (index !== -1) {
+            Product.value[index] = { ...productoActualizado };
+            alert('Producto actualizado correctamente.');
+        }
     } catch (error) {
         console.error('Error al actualizar el producto:', error);
     }
@@ -86,15 +87,15 @@ function handleFileUpload(event: Event) {
     }
 }
 
-
 const openUpdateForm = (product: ProductoDefault) => {
-    Object.assign(selectedProduct, product); 
+    Object.assign(selectedProduct, product);
     if (!product.image) {
-        imagePreview.value = ''; 
+        imagePreview.value = '';
     } else {
-        imagePreview.value = URL.createObjectURL(product.image); 
+        imagePreview.value = product.image;
     }
 };
+
 
 onMounted(() => {
     obtenerProductos();
@@ -118,7 +119,7 @@ onMounted(() => {
                 </div>
             </main>
 
-    <section class="section-producto">
+    <section v-if="selectedProduct" class="section-producto">
                 <div class="formulario">
                     <form class="form-producto2" @submit.prevent="actualizarProducto">
                         <div class="form-row">
