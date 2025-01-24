@@ -39,41 +39,44 @@ export class productoServicio {
     async actualizarProducto(id: string, nuevosDatos: object): Promise<boolean> {
         try {
             if (!id || Object.keys(nuevosDatos).length === 0) {
-                throw new Error('Id inválido o datos vacios.');
+                throw new Error('Id inválido o datos vacíos.');
             }
-            const docRef = await doc(collection(db, 'Productos'), id);
+            const docRef = doc(db, 'productos', id); 
             await updateDoc(docRef, nuevosDatos);
             console.log('Producto actualizado correctamente:', id);
             return true;
         } catch (error) {
-            console.log('Error al actualizar producto:', error);
+            console.error('Error al actualizar producto:', error);
             return false;
         }
     }
+    
 
     async eliminarProducto(id: string): Promise<boolean> {
         try {
-            console.log('Intentando eliminar producto con id:', id);
-            const docRef = doc(db, 'Productos', id);
-            const response = await deleteDoc(docRef);
-
+            const docRef = doc(db, 'productos', id); 
+            await deleteDoc(docRef); 
+            console.log(`Producto con ID ${id} eliminado correctamente.`);
             return true;
         } catch (error) {
-            console.log('Error al eliminar el producto;', error);
+            console.error('Error al eliminar producto:', error);
             return false;
         }
     }
-
-    filtrarProductosPorCategoria (Product: ProductoDefault[] ){
-        const cadenaRegex = localStorage.getItem("modulo")|| '' ;
     
-        const productosPorCategoria =  Product.filter((Product) => Product.etiqueta?.includes(cadenaRegex))
-        .sort((a, b) => { 
+
+    filtrarProductosPorCategoria(Product: ProductoDefault[]): ProductoDefault[] {
+        const cadenaRegex = localStorage.getItem('modulo') || '';
+    
+        const productosPorCategoria = Product.filter((product) =>
+            product.category?.includes(cadenaRegex)
+        ).sort((a, b) => {
             const numA = parseInt(a.id.split('-')[2], 10);
             const numB = parseInt(b.id.split('-')[2], 10);
             return numA - numB;
         });
-
+    
         return productosPorCategoria;
     }
+    
 }

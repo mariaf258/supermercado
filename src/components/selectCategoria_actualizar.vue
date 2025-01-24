@@ -3,6 +3,7 @@ import Iconos from '@/components/iconos.vue'
 import { ref, onMounted, watch } from 'vue'
 import { productoServicio } from '@/services/productos/productoServicio';
 import { Productos } from '@/utils/interfaces/interfaceProductos';
+import ActualizarProducto from './actualizarProducto.vue';
 
 const ProductoServicio = new productoServicio();
 
@@ -93,7 +94,7 @@ const openUpdateForm = (product: ProductoDefault) => {
                     <h2 class="product-price">Precio: {{ product.price }}</h2>
                     
                     <div class="icono-update">
-                        <router-link to="/form_actualizar" @click.native="openUpdateForm(product)">
+                        <router-link to="/form_actualizar" @click="actualizarProducto(product.id)">
                             <img src="../../public/pencil.png" alt="pencil" />
                         </router-link>
                         

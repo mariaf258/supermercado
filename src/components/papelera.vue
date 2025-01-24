@@ -149,8 +149,6 @@ onMounted(() => {
     </div>
 </template>
 
-
-
 <style>
-@import '/src/assets/actualizarProducto.css'
+@import '/src/assets/eliminarProducto.css'
 </style>

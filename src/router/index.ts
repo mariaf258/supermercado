@@ -14,6 +14,7 @@ import agregarProducto from '@/components/agregarProducto.vue'
 import actualizarProducto from '@/components/actualizarProducto.vue'
 import eliminarProducto from '@/components/eliminarProducto.vue'
 import form_actualizar from '@/components/form_actualizar.vue'
+import papelera from '@/components/papelera.vue'
 
 
 const router = createRouter({
@@ -93,6 +94,11 @@ const router = createRouter({
       path: '/form_actualizar',
       name: 'form_actualizar',
       component: form_actualizar
+    },  
+    {
+      path: '/papelera',
+      name: 'papelera',
+      component: papelera
     },
     {
       path: '/about',
