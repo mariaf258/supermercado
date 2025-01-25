@@ -8,12 +8,12 @@ import { alertaCamposProducto } from '@/utils/alertaCampos';
 
 import { ref, reactive, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
+import { filteredProductos } from '@/utils/buscador';
 
 const router = useRouter();
 const ProductoServicio = new productoServicio();
 
-const selectedProduct = reactive<ProductoDefault>({
-});
+const selectedProduct = ref<ProductoDefault | null>(null);
 
 const imagePreview = ref('');
 
@@ -25,13 +25,19 @@ const categorias = ref([
     { id_categoria: '3', name: 'Productos de aseo del hogar' },
 ]);
 
+const filteredProductos = () => {
+    const productosFiltrados =ProductoServicio.filtrarProductoPorId(Product.value)
+    Product.value = productosFiltrados;
+}
+
 // Obtener productos al montar el componente
 const obtenerProductos = async () => {
-    try {
-        Product.value = await productoServicio.obtenerProductos();
-    } catch (error) {
-        console.log('Error al obtener productos:', error);
+    const respuestaObtener = await productoServicio.obtenerProductos();
+    if (respuestaObtener) {
+        Product.value = respuestaObtener;
+        console.log(Product.value);
     }
+    filteredProductos();
 };
 
 // Crear producto
@@ -50,21 +56,36 @@ const crearProducto = async () => {
 
 // Actualizar producto
 const actualizarProducto = async () => {
+    if (!selectedProduct.value) {
+        console.error('No se encontró un producto para actualizar.');
+        return;
+    } 
+    
     try {
-        if (!selectedCard.value || !selectedCard.value.id) {
-            console.error('No se encontró un ID válido para actualizar.');
-            return;
-        }
-        const respuestaActualizar = await ProductoServicio.actualizarProducto(id, productoActualizado);
-        console.log('Producto actualizado:', respuestaActualizar);
+        const respuestaActualizar = await productoServicio.actualizarProducto(
+            selectedProduct.value.id,
+            { ...selectedProduct.value } 
+        );
 
-        const index = Product.value.findIndex((product) => product.id === id);
-        if (index !== -1) {
-            Product.value[index] = { ...productoActualizado };
-            alert('Producto actualizado correctamente.');
+        if (respuestaActualizar) {
+
+            const index = Product.value.findIndex(
+                (product) => product.id === selectedProduct.value!.id
+            );
+
+            if (index !== -1) {
+                Product.value[index] = { ...selectedProduct.value };
+                alert('Producto actualizado correctamente.');
+            } else {
+                alert('No se encontró el producto para actualizar.');
+            }
+
+            selectedProduct.value = null;
+        } else {
+            console.error('Error al actualizar en Firebase.');
         }
     } catch (error) {
-        console.error('Error al actualizar el producto:', error);
+        console.error('Error durante la actualización:', error);
     }
 };
 
@@ -82,7 +103,7 @@ const eliminarProducto = async (id: string) => {
 function handleFileUpload(event: Event) {
     const file = (event.target as HTMLInputElement).files?.[0];
     if (file) {
-        selectedProduct.image = file; 
+        selectedProduct.value.image = file; 
         imagePreview.value = URL.createObjectURL(file);
     }
 }
@@ -171,7 +192,7 @@ onMounted(() => {
                     </form>
 
                     <div class="buttons-update">
-                        <button class="btn-update btn-primary-add" type="submit" @click="actualizarProducto(selectedProduct.id, selectedProduct)">
+                        <button class="btn-update btn-primary-add" type="submit" @click="actualizarProducto">
                             Actualizar
                         </button>
                     </div>

@@ -1,54 +1,53 @@
 <script setup lang="ts">
+import { Productos } from '@/utils/interfaces/interfaceProductos';
 import { ref, onMounted } from 'vue'
 
 const productos = ref([])
-const guardarProductos = ref([])
+const guardarProductos = ref<Productos[]>([])
 
 
 function buttonsVistas() {
-    const productos_guardados = localStorage.getItem('productos')
-    if (productos_guardados) {
-        productos.value = JSON.parse(productos_guardados)
-    }
-
-    const useGuardarProductos = localStorage.getItem('guardarProductos')
-    if (useGuardarProductos) {
-        guardarProductos.value = JSON.parse(useGuardarProductos)
+    try {
+        const productos_guardados = localStorage.getItem('guardarProductos');
+        if (productos_guardados) {
+            guardarProductos.value = JSON.parse(productos_guardados);
+            console.log('Productos guardados cargados:', guardarProductos.value); 
+        }
+    } catch (error) {
+        console.error('Error al cargar datos desde localStorage:', error);
     }
 }
 
+
 onMounted(() => {
-    buttonsVistas()
-})
+    const useGuardarProductos = localStorage.getItem('guardarProductos');
+    if (useGuardarProductos) {
+        guardarProductos.value = JSON.parse(useGuardarProductos);
+    }
+});
+
+function guardarProductoEnFavoritos(producto: any) {
+    const productoExistente = guardarProductos.value.find((item: any) => item.id === producto.id);
+    if (productoExistente) {
+        alert('Este producto ya está en tus favoritos.');
+        return;
+    }
+
+    guardarProductos.value.push(producto);
+
+    localStorage.setItem('guardarProductos', JSON.stringify(guardarProductos.value));
+
+    console.log('Productos guardados en localStorage:', localStorage.getItem('guardarProductos')); 
+    alert('Producto agregado a favoritos.');
+}
 
 
-// import { defineComponent, PropType } from 'vue';
-// import { useProductosGuardadosStore } from '@/stores/productosGuardados';
-
-// export default defineComponent({
-//   props: {
-//     producto: {
-//       type: Object as PropType<{ id: string; name: string; descripcion: string }>,
-//       required: true,
-//     },
-//   },
-//   setup(props) {
-//     const productosStore = useProductosGuardadosStore();
-
-//     const guardarEnFavoritos = (producto: { id: string; name: string; descripcion: string }) => {
-//       productosStore.guardarProducto(producto);
-//       alert('Producto guardado');
-//     };
-
-//     return { guardarEnFavoritos };
-//   },
-// });
 
 </script>
 
 <template>
     <div class="options">
-        <button @click="productosGuardados" class="icon-button">
+        <button @click="guardarProductoEnFavoritos" class="icon-button">
             <img src="../../public/bookmark-color.png" alt="bookmark-color" />
         </button>
             

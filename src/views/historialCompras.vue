@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import HeaderPrincipal from '@/components/headerPrincipal.vue'
 import FooterPrincipal from '@/components/footerPrincipal.vue'
+import Select_fecha from '@/components/select_fecha.vue'
 import Iconos from '@/components/iconos.vue'
 import { cards } from '@/utils/productos';
 import { ref } from 'vue'
@@ -29,6 +30,8 @@ const productos = ref(cards);
 
         <p class="title-1">Historial de Compras</p>
         
+        <Select_fecha/>
+
         <div class="option">
             <p class="fecha">Fecha: DD/MM/AA</p>
             <p class="n-compra">N° de Compra: </p>

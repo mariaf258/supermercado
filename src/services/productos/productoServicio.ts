@@ -8,13 +8,18 @@ const db = getFirestore(app)
 export class productoServicio {
 
     async obtenerProductos() {
-        const db = getFirestore();
-        const productosSnapshot = await getDocs(collection(db, "productos"));
-        return productosSnapshot.docs.map((doc) => {
-            const data = doc.data();
-            console.log("Producto mapeado:", data); 
-            return { id: doc.id, ...data };
-        });
+        try {
+            const productosRef = collection(db, 'productos');
+            const snapshot = await getDocs(productosRef);
+            const productos = snapshot.docs.map(doc => ({
+                id: doc.id,
+                ...doc.data(),
+            }));
+            return productos;
+        } catch (error) {
+            console.error('Error al obtener productos:', error);
+            throw error;
+        }
     }
     
     
@@ -65,7 +70,7 @@ export class productoServicio {
     }
     
 
-    filtrarProductosPorCategoria(Product: ProductoDefault[]): ProductoDefault[] {
+    filtrarProductosPorId(Product: ProductoDefault[]): ProductoDefault[] {
         const cadenaRegex = localStorage.getItem('modulo') || '';
     
         const productosPorCategoria = Product.filter((product) =>

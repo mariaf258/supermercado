@@ -34,19 +34,34 @@ const obtenerDatos = async () => {
     }
 };
 
-const filtrarProductosPorCategoria = (categoria: string) => {
-    console.log("Filtrando productos con categoría:", categoria);
+// const filtrarProductosPorCategoria = (categoria: string) => {
+//     console.log("Filtrando productos con categoría:", categoria);
 
-    if (!categoria) {
+//     if (!categoria) {
+//         filteredProductos.value = [...productoSupermercado.value]; 
+//         return;
+//     }
+
+//     filteredProductos.value = productoSupermercado.value.filter((producto) =>
+//         producto.category?.toLowerCase() === categoria.toLowerCase()
+//     );
+
+//     console.log("Resultados del filtro por categoría:", filteredProductos.value);
+// };
+
+const filtrarProductosPorId = (id: string) => {
+    console.log("Filtrando productos con id:", id);
+
+    if (!id) {
         filteredProductos.value = [...productoSupermercado.value]; 
         return;
     }
 
     filteredProductos.value = productoSupermercado.value.filter((producto) =>
-        producto.category?.toLowerCase() === categoria.toLowerCase()
+        producto.id?.toLowerCase() === id.toLowerCase()
     );
 
-    console.log("Resultados del filtro por categoría:", filteredProductos.value);
+    console.log("Resultados del filtro por id:", filteredProductos.value);
 };
 
 onMounted(() => {
@@ -69,7 +84,7 @@ const openUpdateForm = (product: ProductoDefault) => {
 </script>
 
 <template>
-    <select class="select_categoria" @change="(event) => filtrarProductosPorCategoria(event.target.value)">
+    <select class="select_categoria" @change="(event) => filtrarProductosPorId(event.target.value)">
         <option value="">Todas las categorías</option>
         <option value="alimentos">Alimentos</option>
         <option value="productos de aseo personal">Productos de aseo personal</option>
