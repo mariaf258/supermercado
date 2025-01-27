@@ -1,136 +1,118 @@
 <script setup lang="ts">
 import Header from '@/components/header.vue'
 import Footer from '@/components/footer.vue'
-import BuscadorSubVista from '@/components/buscador/buscador-subVista.vue'
-import SelectCategoria_actualizar from '@/components/selectCategoria_actualizar.vue'
+import Select_categoria from '@/components/select/selectCategoria_actualizar.vue'
 import ProductoDefault from '@/utils/interfaces/interfaceProductos';
 import { productoServicio } from '@/services/productos/productoServicio';
 import { alertaCamposProducto } from '@/utils/alertaCampos';
-import { filteredProductos, filtrarProductos } from '@/utils/buscador';
+
 import { ref, reactive, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
-import { cards } from '@/utils/productos';
-
-const inputValue = ref('');
-
-const filtrar = (event: Event) => {
-    inputValue.value = (event.target as HTMLInputElement).value;
-    filtrarProductos(cards.value, inputValue.value);
-};
-
-onMounted(() => {
-    filteredProductos.value = [...cards.value];
-});
 
 const router = useRouter();
 const ProductoServicio = new productoServicio();
 
-const selectedProduct = reactive<ProductoDefault>({
-    id: '', 
+const selectedProduct = ref<ProductoDefault>({
+    id: '',
     name: '',
     price: '',
-    amount: '',
     category: '',
-    image: null,
     unit: '',
-    customUnit: '',
-
+    image: '',
+    customUnit: ''
 });
 
 const imagePreview = ref('');
-
 const Product = ref<ProductoDefault[]>([]);
-
 const categorias = ref([
     { id_categoria: '1', name: 'Alimentos' },
     { id_categoria: '2', name: 'Productos de aseo personal' },
     { id_categoria: '3', name: 'Productos de aseo del hogar' },
 ]);
 
-// Obtener productos al montar el componente
+const filteredProductos = ref<ProductoDefault[]>([]);
+
 const obtenerProductos = async () => {
     try {
-        Product.value = await productoServicio.obtenerProductos();
+        const respuestaObtener = await ProductoServicio.obtenerProductos();
+        if (respuestaObtener) {
+            Product.value = respuestaObtener;
+        }
     } catch (error) {
-        console.log('Error al obtener productos:', error);
+        console.error('Error al obtener productos:', error);
     }
 };
 
-// Crear producto
+const filtrarProductoPorId = () => {
+    const productosFiltrados = ProductoServicio.filtrarProductoPorId(Product.value);
+    filteredProductos.value = productosFiltrados;
+};
+
 const crearProducto = async () => {
     try {
-        if (!alertaCamposProducto(selectedProduct)) {
-        return;
+        if (!alertaCamposProducto(selectedProduct.value)) {
+            return;
         }
         alert('Se agregó producto exitosamente.');
-        const respuestaCrear = await ProductoServicio.crearProducto(selectedProduct);
+        const respuestaCrear = await ProductoServicio.crearProducto(selectedProduct.value);
         console.log(respuestaCrear);
     } catch (error) {
         console.error('Error al crear el producto:', error);
     }
 };
 
-// Actualizar producto
-// const actualizarProducto = async (id: string, productoActualizado: ProductoDefault) => {
-//     if (!selectedProduct.value || !selectedProduct.value.id){
-//         console.error('Error al actualizar el producto:', error);
-//         return;
-//     }
-    
-//     console.log(selectedProduct.value);
-    
-//     try {
-//         const respuestaActualizar = await productoServicio.actualizarProducto(id, productoActualizado);
-//         console.log(respuestaActualizar);
-//     } catch (error) {
-//         console.error('Error al actualizar el producto:', error);
-    
+const actualizarProducto = async () => {
+    if (!selectedProduct.value) {
+        console.error('No hay producto seleccionado para actualizar.');
+        return;
+    }
 
-//     if (respuestaActualizar) {
-//         const index = cards.value.findIndex(
-//             (card) => card.id === selectedProduct.value!.id);
-        
-//         if (index !== -1) {
-//             cards.value[index] = { ...selectedProduct.value }
-//             alert('Producto actualizado correctamente.')
-//         } else {
-//             alert('No se encontro producto para actualizar.')
-//         }
-//         selectedProduct.value = null;
-//     } else {
-//         console.error('Error al actualizar en Firebase:');
-//     }
-// } catch (error) {
-//     console.error('Error durante la actualización:', error);
-// }
-// };
+    try {
+        const nuevosDatos = { ...selectedProduct.value };
+        const respuestaActualizar = await ProductoServicio.actualizarProducto(
+            selectedProduct.value.id,
+            nuevosDatos
+        );
 
-// Eliminar producto
+        if (respuestaActualizar) {
+            alert('Producto actualizado correctamente.');
+            const index = Product.value.findIndex(
+                (product) => product.id === selectedProduct.value.id
+            );
+            if (index !== -1) {
+                Product.value[index] = { ...selectedProduct.value };
+            }
+        } else {
+            console.error('Error al actualizar el producto en Firebase.');
+        }
+    } catch (error) {
+        console.error('Error al actualizar el producto:', error);
+    }
+};
+
 const eliminarProducto = async (id: string) => {
     try {
-        const respuestaEliminar = await productoServicio.eliminarProducto(id);
+        const respuestaEliminar = await ProductoServicio.eliminarProducto(id);
         console.log(respuestaEliminar);
     } catch (error) {
         console.error('Error al eliminar el producto:', error);
     }
 };
 
-// Manejo de carga de imágenes
 function handleFileUpload(event: Event) {
     const file = (event.target as HTMLInputElement).files?.[0];
     if (file) {
-        selectedProduct.image = file; 
+        selectedProduct.value.image = file;
         imagePreview.value = URL.createObjectURL(file);
     }
 }
 
-
 const openUpdateForm = (product: ProductoDefault) => {
-    Object.assign(selectedProduct, product); 
-    if (!product.image) {
-        imagePreview.value = ''; 
+    selectedProduct.value = { ...product };
+    if (product.image) {
+        imagePreview.value = URL.createObjectURL(product.image);
     } else {
-        imagePreview.value = URL.createObjectURL(product.image); 
+        imagePreview.value = '';
     }
 };
 
@@ -138,55 +120,98 @@ onMounted(() => {
     obtenerProductos();
 });
 </script>
-
-
 <template>
     <div id="app">
         <div class="page-wrapper">
             <div class="">
 
-            <Header/>
-            <main class="main">
-                <div class="button-container">
-                    <button class="expand-button" @click="router.go(-1)">
-                        <img src="../../public/back-white.png" alt="Retroceder" />
-                    </button>
-                </div>
-                <div class="title-update">
-                    <h2>Actualizar Producto</h2>
-                </div>
-                
-                <div class="search-container-2">
-                <div class="search-box-2">
-                    
-                    <input 
-                    @input="filtrar" 
-                    type="text" 
-                    id="searchInput-2" 
-                    placeholder="Buscar..." 
-                    />
-                    <img src="../../../public/search.png" alt="search" class="search-icon-2" />
-                </div>
-                <div id="results" class="results-2">
-                    <ul>
-                        <li v-for="producto in filteredProductos" :key="producto.id">
-                            {{ producto.name }} - {{ producto.description }}
-                        </li>
-                    </ul>
-                </div>
-            </div>   
-            </main>
+                <Header />
+                <main class="main">
+                    <div class="button-container">
+                        <button class="expand-button2" @click="router.go(-1)">
+                            <img src="../../public/back-white.png" alt="Retroceder" />
+                        </button>
+                    </div>
+                    <div class="title-form-update">
+                        <h2>Actualizar Producto</h2>
+                    </div>
+                </main>
 
-            <SelectCategoria_actualizar/>
+                <section v-if="Product.length > 0">
+                    <div class="product-list">
+                        <h3>Selecciona un producto para actualizar:</h3>
+                        <div v-for="product in Product" :key="product.id" class="product-item">
+                            <button @click="openUpdateForm(product)">
+                                Editar {{ product.name }}
+                            </button>
+                        </div>
+                    </div>
+                </section>
 
-            
-            
-            <Footer />
+                <section v-if="selectedProduct" class="section-producto">
+                    <div class="formulario">
+                        <form class="form-producto2" @submit.prevent="actualizarProducto">
+                            <div class="form-row">
+                                <div class="column">
+                                    <div class="form-group">
+                                        <input type="text" v-model="selectedProduct.name" placeholder="" />
+                                        <label class="form-label2">Nombre del Producto</label>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="number" v-model="selectedProduct.price" placeholder="" />
+                                        <label class="form-label2">Precio del Producto</label>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="number" v-model="selectedProduct.amount" placeholder="" />
+                                        <label class="form-label2">Cantidad del Producto</label>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label2" v-show="!selectedProduct.unit" for="unidad">Unidad de Medida</label>
+                                        <select v-model="selectedProduct.unit" id="unidad" class="unit-select">
+                                            <option value="unidad" disabled>Selecciona una opción</option>
+                                            <option value="kilo">Kg</option>
+                                            <option value="gramo">gr</option>
+                                            <option value="litro">Litro</option>
+                                            <option value="ml">ml</option>
+                                            <option value="unidad">Unidad/es</option>
+                                            <option value="otra">Otra</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <pre>{{ selectedProduct }}</pre>
+                                <div class="column">
+                                    <div class="image-uploader2">
+                                        <div class="image-preview2" v-if="imagePreview">
+                                            <img :src="imagePreview" alt="Previsualización de la imagen" />
+                                        </div>
+                                        <div class="image-placeholder2" v-else>
+                                            <img src="../../public/photo-off.png" alt="Sin imagen seleccionada" />
+                                        </div>
+                                        <div class="form-photo2">
+                                            <input type="file" @change="handleFileUpload" />
+                                            <label class="form-label2">Imagen del Producto</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                        <div class="buttons-update">
+                            <button class="btn-update btn-primary-add" type="submit" @click="actualizarProducto">
+                                Actualizar
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <Footer />
             </div>
         </div>
     </div>
 </template>
-
 
 
 <style>

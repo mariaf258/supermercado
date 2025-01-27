@@ -1,3 +1,22 @@
+
 .fecha {
-    
+    margin: 20px;
+    text-align: center;
+}
+
+.fecha input {
+    margin-right: 10px;
+}
+
+.fecha button {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.fecha button:hover {
+    background-color: #0056b3;
 }

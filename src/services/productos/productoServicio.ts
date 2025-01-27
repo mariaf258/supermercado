@@ -1,28 +1,24 @@
-import Producto from '@/utils/interfaces/interfaceProductos'
 import { getFirestore, getDocs, addDoc, updateDoc, deleteDoc, collection, doc } from 'firebase/firestore';
-import app from '@/utils/firebase'
+import app from '@/utils/firebase';
 import ProductoDefault from '@/utils/interfaces/interfaceProductos';
 
-const db = getFirestore(app) 
+const db = getFirestore(app);
 
 export class productoServicio {
-
     async obtenerProductos() {
         try {
             const productosRef = collection(db, 'productos');
             const snapshot = await getDocs(productosRef);
-            const productos = snapshot.docs.map(doc => ({
+            return snapshot.docs.map(doc => ({
                 id: doc.id,
                 ...doc.data(),
             }));
-            return productos;
         } catch (error) {
             console.error('Error al obtener productos:', error);
             throw error;
         }
     }
-    
-    
+
     async crearProducto(producto: ProductoDefault) {
         try {
             const docRef = await addDoc(collection(db, 'productos'), {
@@ -30,23 +26,30 @@ export class productoServicio {
                 price: producto.price,
                 amount: producto.amount,
                 category: producto.category,
-                image: producto.image ? producto.image.name : '', 
-                unit: producto.unit, 
-                customUnit: producto.unit === 'otra' ? producto.customUnit : '', 
+                image: producto.image ? producto.image.name : '',
+                unit: producto.unit,
+                customUnit: producto.unit === 'otra' ? producto.customUnit : '',
             });
-            return docRef.id; 
-            } catch (error) {
+            return docRef.id;
+        } catch (error) {
             console.error('Error al agregar el producto:', error);
             throw error;
-            }
+        }
     }
 
     async actualizarProducto(id: string, nuevosDatos: object): Promise<boolean> {
         try {
             if (!id || Object.keys(nuevosDatos).length === 0) {
-                throw new Error('Id inválido o datos vacíos.');
+                console.error('Id inválido o datos vacíos.');
+                return false;
             }
-            const docRef = doc(db, 'productos', id); 
+    
+            // Asegúrate de que la imagen sea solo el nombre del archivo
+            if (nuevosDatos.image && nuevosDatos.image instanceof File) {
+                nuevosDatos.image = nuevosDatos.image.name;
+            }
+    
+            const docRef = doc(db, 'productos', id);
             await updateDoc(docRef, nuevosDatos);
             console.log('Producto actualizado correctamente:', id);
             return true;
@@ -59,8 +62,8 @@ export class productoServicio {
 
     async eliminarProducto(id: string): Promise<boolean> {
         try {
-            const docRef = doc(db, 'productos', id); 
-            await deleteDoc(docRef); 
+            const docRef = doc(db, 'productos', id);
+            await deleteDoc(docRef);
             console.log(`Producto con ID ${id} eliminado correctamente.`);
             return true;
         } catch (error) {
@@ -68,20 +71,16 @@ export class productoServicio {
             return false;
         }
     }
-    
 
     filtrarProductosPorId(Product: ProductoDefault[]): ProductoDefault[] {
         const cadenaRegex = localStorage.getItem('modulo') || '';
-    
-        const productosPorCategoria = Product.filter((product) =>
+
+        return Product.filter(product =>
             product.category?.includes(cadenaRegex)
         ).sort((a, b) => {
             const numA = parseInt(a.id.split('-')[2], 10);
             const numB = parseInt(b.id.split('-')[2], 10);
             return numA - numB;
         });
-    
-        return productosPorCategoria;
     }
-    
 }

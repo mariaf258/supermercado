@@ -93,13 +93,14 @@ const router = createRouter({
     {
       path: '/form_actualizar',
       name: 'form_actualizar',
-      component: form_actualizar
-    },  
-    {
-      path: '/papelera',
-      name: 'papelera',
-      component: papelera
+      component: form_actualizar,
+      props: true,
     },
+    // {
+    //   path: '/papelera',
+    //   name: 'papelera',
+    //   component: papelera
+    // },
     {
       path: '/about',
       name: 'about',

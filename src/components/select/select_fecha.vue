@@ -6,11 +6,11 @@ const buscarCompra = () => {
             console.log(`Buscando compras para la fecha: ${fechaSeleccionada.value}`);
             // Aquí iría la llamada a la API o la lógica para buscar en la base de datos.
         } else {
-            alert("Por favor, selecciona una fecha.");
+            window.alert('Por favor, selecciona una fecha.');
+
         }
 };
 
-    return { fechaSeleccionada, buscarCompra };
 
 </script>
 

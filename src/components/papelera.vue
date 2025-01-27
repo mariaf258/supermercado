@@ -2,7 +2,7 @@
 import Header from '@/components/header.vue'
 import Footer from '@/components/footer.vue'
 import BuscadorSubVista from '@/components/buscador/buscador-subVista.vue'
-import SelectCategoria_eliminar from '@/components/selectCategoria_eliminar.vue'
+import SelectCategoria_eliminar from '@/components/select/selectCategoria_eliminar.vue'
 import ProductoDefault from '@/utils/interfaces/interfaceProductos';
 import { productoServicio } from '@/services/productos/productoServicio';
 import { alertaCamposProducto } from '@/utils/alertaCampos';

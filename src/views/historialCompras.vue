@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import HeaderPrincipal from '@/components/headerPrincipal.vue'
 import FooterPrincipal from '@/components/footerPrincipal.vue'
-import Select_fecha from '@/components/select_fecha.vue'
+import Select_fecha from '@/components/select/select_fecha.vue'
 import Iconos from '@/components/iconos.vue'
 import { cards } from '@/utils/productos';
 import { ref } from 'vue'
