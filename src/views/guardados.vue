@@ -25,7 +25,6 @@ onMounted(() => {
 });
 
 
-// Guardar un producto en favoritos
 function guardarProductoEnFavoritos(producto: any) {
     const productoExistente = guardarProductos.value.find((item: any) => item.id === producto.id);
     if (productoExistente) {
@@ -49,19 +48,16 @@ function guardarProductoEnFavoritos(producto: any) {
       <Header />
 
       <main class="main">
-        <!-- Botón para regresar -->
         <div class="button-container">
           <button class="expand-button" @click="router.go(-1)">
             <img src="../../public/back-white.png" alt="Regresar" />
           </button>
         </div>
 
-        <!-- Título -->
         <div class="title-saved">
           <h2>Tus productos guardados</h2>
         </div>
 
-        <!-- Lista de productos guardados -->
         <div v-if="guardarProductos.length === 0" class="empty-message">
           No tienes productos guardados.
         </div>

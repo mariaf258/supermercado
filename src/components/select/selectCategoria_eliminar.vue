@@ -96,7 +96,7 @@ const eliminarProducto = async (id: string | undefined) => {
 
           <div class="icono-update">
             <img
-              src="../../public/trash-color.png"
+              src="../../../public/trash-color.png"
               alt="trash"
               @click="eliminarProducto(product.id)"
               style="cursor: pointer"

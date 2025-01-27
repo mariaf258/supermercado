@@ -150,11 +150,11 @@ onMounted(() => {
                     </div>
                 </form>
 
-                <div class="buttons-update">
+                <!-- <div class="buttons-update">
                     <button class="btn-update btn-primary-add" type="submit" @click="actualizarProducto">
                         Actualizar
                     </button>
-                </div>
+                </div> -->
             </div>
         </section>
     </div>

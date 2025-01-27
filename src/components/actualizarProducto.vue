@@ -137,16 +137,18 @@ onMounted(() => {
                     </div>
                 </main>
 
-                <section v-if="Product.length > 0">
-                    <div class="product-list">
-                        <h3>Selecciona un producto para actualizar:</h3>
-                        <div v-for="product in Product" :key="product.id" class="product-item">
-                            <button @click="openUpdateForm(product)">
-                                Editar {{ product.name }}
-                            </button>
-                        </div>
+                <section v-if="Product.length > 0" class="product-selection">
+                    <label class="form-label2">Selecciona un producto para actualizar:</label>
+                    <div class="select-container">
+                        <select v-model="selectedProduct" @change="handleProductSelection" class="selct_product">
+                            <option value="" disabled selected>Selecciona un producto</option>
+                            <option v-for="product in Product" :key="product.id" :value="product">
+                                {{ product.name }}
+                            </option>
+                        </select>
                     </div>
                 </section>
+
 
                 <section v-if="selectedProduct" class="section-producto">
                     <div class="formulario">
@@ -181,7 +183,7 @@ onMounted(() => {
                                         </select>
                                     </div>
                                 </div>
-                                <pre>{{ selectedProduct }}</pre>
+                                <!-- <pre>{{ selectedProduct }}</pre> -->
                                 <div class="column">
                                     <div class="image-uploader2">
                                         <div class="image-preview2" v-if="imagePreview">
@@ -200,7 +202,7 @@ onMounted(() => {
                         </form>
 
                         <div class="buttons-update">
-                            <button class="btn-update btn-primary-add" type="submit" @click="actualizarProducto">
+                            <button class="btns-update btn-primary-add" type="submit" @click="actualizarProducto">
                                 Actualizar
                             </button>
                         </div>

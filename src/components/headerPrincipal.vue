@@ -5,11 +5,18 @@ import { filteredProductos, filtrarProductos } from '@/utils/buscador';
 import { cards } from '@/utils/productos';
 import { ref, onMounted } from 'vue'
 
-
 const inputValue = ref('');
+const cards = ref<Productos[]>([]); 
+const filteredProductos = ref<Productos[]>([]); 
 
 const filtrarProductos = (event: Event) => {
-    const input = (event.target as HTMLInputElement).value.toLowerCase();
+    const target = event.target as HTMLInputElement;
+    if (!target || target.tagName !== 'INPUT') {
+        console.error('El evento no proviene de un elemento <input>');
+        return;
+    }
+
+    const input = target.value.toLowerCase();
     console.log('Buscando productos con:', input);
 
     if (!input) {
@@ -18,9 +25,7 @@ const filtrarProductos = (event: Event) => {
     }
 
     filteredProductos.value = cards.value.filter((producto) =>
-        (producto.name && producto.name.toLowerCase().includes(input)) ||
-        (producto.categoria && producto.categoria.toLowerCase().includes(input))
-    );
+        (producto.name && producto.name.toLowerCase().includes(input))    );
 
     console.log('Resultado del filtro:', filteredProductos.value);
 };
@@ -28,7 +33,11 @@ const filtrarProductos = (event: Event) => {
 
 onMounted(() => {
     filteredProductos.value = [...cards.value];
+    console.log('Productos iniciales:', filteredProductos.value);
 });
+
+console.log(filteredProductos.value);
+
 </script>
 
 <template>
@@ -40,7 +49,7 @@ onMounted(() => {
                 alt="supermercado xyz"
                 class="title-supermercado align-items-center"
             />
-            </div>
+        </div>
 
             <nav class="navbar bg-body-tertiary fixed-top">
             <navToggle/>
@@ -59,7 +68,7 @@ onMounted(() => {
                     <div id="results" class="results">
                         <ul>
                             <li v-for="producto in filteredProductos" :key="producto.id">
-                                {{ producto.name }} - {{ producto.description }}
+                                {{ producto.name }}
                             </li>
                         </ul>
                     </div>

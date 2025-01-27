@@ -152,5 +152,5 @@ onMounted(() => {
 
 
 <style>
-@import '/src/assets/actualizarProducto.css'
+/* @import '/src/assets/actualizarProducto.css' */
 </style>
