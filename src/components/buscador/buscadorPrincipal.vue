@@ -1,54 +1,19 @@
 <script setup lang="ts">
-import { filteredProductos, filtrarProductos } from '@/utils/buscador';
-import { cards } from '@/utils/productos';
-import { ref, onMounted } from 'vue'
-const inputValue = ref('');
-const cards = ref([]);
+import { ref } from 'vue';
+
 const filteredProductos = ref([]);
-
-const filtrarProductos = (event: Event) => {
-    const target = event.target as HTMLInputElement;
-    if (!target || target.tagName !== 'INPUT') {
-        console.error('El evento no proviene de un elemento <input>');
+const filtrarProductos = (productos: any[], query: string) => {
+    if (!query) {
+        filteredProductos.value = [...productos];
         return;
     }
 
-    const input = target.value.toLowerCase();
-    console.log('Buscando productos con:', input);
-
-    if (!input) {
-        filteredProductos.value = [...cards.value];
-        return;
-    }
-
-    filteredProductos.value = cards.value.filter((producto) =>
-        (producto.name?.toLowerCase().includes(input)) ||
-        (producto.categoria?.toLowerCase().includes(input))
+    const input = query.toLowerCase();
+    filteredProductos.value = productos.filter((producto) =>
+        producto.name?.toLowerCase().includes(input) ||
+        producto.categoria?.toLowerCase().includes(input)
     );
-
-    console.log('Resultado del filtro:', filteredProductos.value);
 };
-
-const productoServicio = new ProductoServicio();
-
-const filtrar = (event: Event) => {
-    inputValue.value = (event.target as HTMLInputElement).value;
-    filtrarProductos(cards.value, inputValue.value);
-};
-
-onMounted(() => {
-    filteredProductos.value = [...cards.value];
-});
-
-
-const obtenerDatos = async () => {
-    const producto: Productos[] = await productoServicio.obtenerProductos()
-    console.log(producto);
-    console.log(filtrarProductos.value.length);
-
-}
-
-console.log('Datos de cards:', cards.value);
 
 </script>
 
@@ -57,7 +22,7 @@ console.log('Datos de cards:', cards.value);
         <div class="search-box-1">
             
             <input 
-            @input="filtrar" 
+            @input="filtrarProductos" 
             type="text" 
             id="searchInput-1" 
             placeholder="Buscar..." 

@@ -5,7 +5,7 @@ import { ref, onMounted } from 'vue'
 const productos = ref([])
 const guardarProductos = ref<Productos[]>([])
 
-
+const props = defineProps(["product"])
 function buttonsVistas() {
     try {
         const productos_guardados = localStorage.getItem('guardarProductos');
@@ -26,19 +26,41 @@ onMounted(() => {
     }
 });
 
-function guardarProductoEnFavoritos(producto: any) {
-    const productoExistente = guardarProductos.value.find((item: any) => item.id === producto.id);
+function guardarProductoEnFavoritos() {
+
+    const productoExistente = guardarProductos.value.find((item: any) => item.id === props.product?.id);
+    
+    console.log(props.product);
+
     if (productoExistente) {
         alert('Este producto ya está en tus favoritos.');
         return;
     }
-
-    guardarProductos.value.push(producto);
+    guardarProductos.value.push(props.product);
 
     localStorage.setItem('guardarProductos', JSON.stringify(guardarProductos.value));
 
     console.log('Productos guardados en localStorage:', localStorage.getItem('guardarProductos')); 
     alert('Producto agregado a favoritos.');
+}
+
+function guardarEnCarritoCompras() {
+    const productoExistente = guardarProductos.value.find((item: any) => item.id === props.product?.id);
+    
+    console.log(props.product);
+    
+    
+    if (productoExistente) {
+        alert('Este producto ya está en tu carrito de compras.');
+        return;
+    }
+
+    guardarProductos.value.push(props.product);
+
+    localStorage.setItem('guardarProductos', JSON.stringify(guardarProductos.value));
+
+    console.log('Productos guardados en localStorage:', localStorage.getItem('guardarProductos')); 
+    alert('Producto agregado a tu carrito de compras.');
 }
 
 
@@ -51,7 +73,7 @@ function guardarProductoEnFavoritos(producto: any) {
             <img src="../../public/bookmark-color.png" alt="bookmark-color" />
         </button>
             
-        <button @click="productosAComprar" class="icon-button">
+        <button @click="guardarEnCarritoCompras" class="icon-button">
             <img src="../../public/add-cart-color.png" alt="add-cart-color" />
         </button>
     </div>

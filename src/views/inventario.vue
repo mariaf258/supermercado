@@ -29,17 +29,13 @@ const obtenerDatos = async () => {
   try {
     const productos = await ProductoServicio.obtenerProductos();
     console.log("Productos obtenidos desde Firebase:", productos);
-    console.log("Producto:", productos);
-    console.log("Categoría:", productos.category);
-
     if (!productos || productos.length === 0) {
       console.error("No se encontraron productos en Firebase.");
       loading.value = false;
       return;
     }
-
-    productoSupermercado.value = productos; 
-    filteredProductos.value = [...productos]; 
+    productoSupermercado.value = productos;
+    filteredProductos.value = [...productos];
   } catch (error) {
     console.error("Error al obtener productos desde Firebase:", error);
   } finally {
@@ -66,6 +62,10 @@ onMounted(() => {
   obtenerDatos();
 });
 
+const updateFilteredProductos = (productosFiltrados: Productos[]) => {
+  filteredProductos.value = productosFiltrados;
+};
+
 watch(filteredProductos, (newValue) => {
   console.log("Nuevo valor de productos filtrados:", [...newValue]); 
 });
@@ -77,15 +77,11 @@ watch(filteredProductos, (newValue) => {
     <div id="app">
         <div class="page-wrap">
         
-            <HeaderPrincipal/>
+            <HeaderPrincipal @updateFilteredProductos="updateFilteredProductos"/>
 
             <p class="title-1">Inventario de Productos</p>
 
-            <!-- <div class="button_container">
-                <button class="expand_button">
-                    <img src="../../public/add-fill.png" alt=""/>
-                </button>
-            </div> -->
+        
             <NavToggle_inventario/>
             
             <div class="row g-2">

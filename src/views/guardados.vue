@@ -5,6 +5,7 @@ import BuscadorSubVista from '@/components/buscador/buscador-subVista.vue'
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router';
 
+
 const router  = useRouter()
 
 const productos = ref([])
@@ -15,7 +16,7 @@ onMounted(() => {
     if (useGuardarProductos) {
         try {
             guardarProductos.value = JSON.parse(useGuardarProductos);
-            console.log('Productos guardados cargados desde localStorage:', guardarProductos.value);
+            // console.log('Productos guardados cargados desde localStorage:', guardarProductos.value);
         } catch (error) {
             console.error('Error al parsear los datos de localStorage:', error);
         }
@@ -47,9 +48,9 @@ function guardarProductoEnFavoritos(producto: any) {
     <div class="page-wrapper">
       <Header />
 
-      <main class="main">
-        <div class="button-container">
-          <button class="expand-button" @click="router.go(-1)">
+      <main class="main-saved">
+        <div class="button_conta">
+          <button class="expand_btn" @click="router.go(-1)">
             <img src="../../public/back-white.png" alt="Regresar" />
           </button>
         </div>
@@ -59,9 +60,10 @@ function guardarProductoEnFavoritos(producto: any) {
         </div>
 
         <div v-if="guardarProductos.length === 0" class="empty-message">
-          No tienes productos guardados.
+            No tienes productos guardados.
         </div>
         <div v-else class="products-container">
+          <!-- <pre> {{ guardarProductos }}</pre> -->
           <div 
             class="product-card" 
             v-for="producto in guardarProductos" 

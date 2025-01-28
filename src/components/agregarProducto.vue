@@ -85,7 +85,7 @@ function handleFileUpload(event: Event) {
                         <option value="litro">Litro</option>
                         <option value="litro">ml</option>
                         <option value="litro">Unidad/es</option>
-                        <option value="otra">Otra</option>
+                        <option value="otra">Rollo</option>
                     </select>
                     </div>
 
