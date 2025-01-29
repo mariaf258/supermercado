@@ -26,18 +26,12 @@ onMounted(() => {
 });
 
 
-function guardarProductoEnFavoritos(producto: any) {
-    const productoExistente = guardarProductos.value.find((item: any) => item.id === producto.id);
-    if (productoExistente) {
-        window.alert('Este producto ya está en tus favoritos.');
-        return;
-    }
-
-    guardarProductos.value = [...guardarProductos.value, producto];
+function eliminarProductoDeFavoritos(id: string) {
+    console.log('Eliminando producto con id:', id);
+    guardarProductos.value = guardarProductos.value.filter((producto: any) => producto.id !== id);
     localStorage.setItem('guardarProductos', JSON.stringify(guardarProductos.value));
-
-    console.log('Productos guardados en localStorage:', localStorage.getItem('guardarProductos')); 
-    window.alert('Producto agregado a favoritos.');
+    window.alert('Producto eliminado de favoritos.');
+    console.log('Productos actualizados:', guardarProductos.value);
 }
 
 
@@ -77,9 +71,21 @@ function guardarProductoEnFavoritos(producto: any) {
               <h1 class="product-name">{{ producto.name }}</h1>
               <h3 class="product-amount">{{ producto.amount }} {{ producto.unit }}</h3>
               <h2 class="product-price">Precio: {{ producto.price }}</h2>
+              <div class="icono-update">
+                <img
+                  src="../../../public/trash-color.png"
+                  alt="trash"
+                  @click="eliminarProductoDeFavoritos(producto.id)"
+                  style="cursor: pointer"
+                />
+              </div>
             </div>
           </div>
         </div>
+
+        <button class="vaciar_guardados">
+          Vaciar Productos
+        </button>
 
         <BuscadorSubVista />
       </main>

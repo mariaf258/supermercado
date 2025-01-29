@@ -2,67 +2,50 @@
 import { Productos } from '@/utils/interfaces/interfaceProductos';
 import { ref, onMounted } from 'vue'
 
-const productos = ref([])
-const guardarProductos = ref<Productos[]>([])
+const guardarProductos = ref<Productos[]>([]) 
+const carritoCompras = ref<Productos[]>([]) 
 
 const props = defineProps(["product"])
-function buttonsVistas() {
-    try {
-        const productos_guardados = localStorage.getItem('guardarProductos');
-        if (productos_guardados) {
-            guardarProductos.value = JSON.parse(productos_guardados);
-            console.log('Productos guardados cargados:', guardarProductos.value); 
-        }
-    } catch (error) {
-        console.error('Error al cargar datos desde localStorage:', error);
-    }
-}
-
 
 onMounted(() => {
-    const useGuardarProductos = localStorage.getItem('guardarProductos');
-    if (useGuardarProductos) {
-        guardarProductos.value = JSON.parse(useGuardarProductos);
+    const favoritos = localStorage.getItem('guardarProductos');
+    if (favoritos) {
+        guardarProductos.value = JSON.parse(favoritos);
+    }
+
+    const carrito = localStorage.getItem('carritoCompras');
+    if (carrito) {
+        carritoCompras.value = JSON.parse(carrito);
     }
 });
 
 function guardarProductoEnFavoritos() {
-
-    const productoExistente = guardarProductos.value.find((item: any) => item.id === props.product?.id);
+    const productoExistente = guardarProductos.value.find((item) => item.id === props.product?.id);
     
-    console.log(props.product);
-
     if (productoExistente) {
         alert('Este producto ya está en tus favoritos.');
         return;
     }
-    guardarProductos.value.push(props.product);
 
+    guardarProductos.value.push(props.product);
     localStorage.setItem('guardarProductos', JSON.stringify(guardarProductos.value));
 
-    console.log('Productos guardados en localStorage:', localStorage.getItem('guardarProductos')); 
     alert('Producto agregado a favoritos.');
 }
 
 function guardarEnCarritoCompras() {
-    const productoExistente = guardarProductos.value.find((item: any) => item.id === props.product?.id);
-    
-    console.log(props.product);
-    
+    const productoExistente = carritoCompras.value.find((item) => item.id === props.product?.id);
     
     if (productoExistente) {
         alert('Este producto ya está en tu carrito de compras.');
         return;
     }
 
-    guardarProductos.value.push(props.product);
+    carritoCompras.value.push(props.product);
+    localStorage.setItem('carritoCompras', JSON.stringify(carritoCompras.value)); 
 
-    localStorage.setItem('guardarProductos', JSON.stringify(guardarProductos.value));
-
-    console.log('Productos guardados en localStorage:', localStorage.getItem('guardarProductos')); 
     alert('Producto agregado a tu carrito de compras.');
 }
-
 
 
 </script>

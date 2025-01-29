@@ -1,3 +1,7 @@
+.app_carrito {
+  overflow-x: hidden;  
+}  
+  
   .main-carrito {
     display: flex;
     flex-direction: column;
@@ -19,13 +23,17 @@
     border-radius: 5px;
     cursor: pointer;
   }
+
+  .card_body {
+    padding: 16px 0px 16px 16px;
+    text-align: center;
+    border-top: 2px solid #f96616;
+    background-color: rgb(249, 102, 22, 0.09);
+    /* height: 160px; */
+  }
   
   .expand-button {
-    /* position: relative;
-    background-color: #f96616;
-    border: none;
-    cursor: pointer; */
-    top: -200px;
+    top: 40px;
     left: 630px;
     background-color: transparent;
     border: none;
@@ -73,7 +81,7 @@
     border-radius: 5px;
     position: relative;
     z-index: 2;
-    top: -60px;
+    top: -20px;
   }
   
   .Ellipse {
@@ -92,16 +100,13 @@
     margin-bottom: 50px;
   }
   
-  .title-cart h2 {
-    /* font-size: 1.5rem; */
-    text-align: center;
-    position: relative;
-    color: #2C3E50;
-    font-size: 25px;
-    font-weight: bold;    
-    top: -260px;
-    right: 35rem;
-    /* font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; */
+  .title-cart {
+    margin-left: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin-bottom: 20px;
+    text-align: left;
   }
   
   /* .button {

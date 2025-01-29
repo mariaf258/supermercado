@@ -12,39 +12,32 @@ const productos = ref([])
 const carritoCompras = ref([])
 
 onMounted(() => {
-    const useCarritoCompras = localStorage.getItem('guardarProductos');
+    const useCarritoCompras = localStorage.getItem('carritoCompras');
     if (useCarritoCompras) {
         try {
-          carritoCompras.value = JSON.parse(useCarritoCompras);
-            console.log('Productos agregados desde localStorage:', carritoCompras.value);
+            carritoCompras.value = JSON.parse(useCarritoCompras);
         } catch (error) {
             console.error('Error al parsear los datos de localStorage:', error);
         }
-    } else {
-        console.log('No hay productos agregados en localStorage.');
     }
 });
 
+function eliminarDeCarritoCompras(id: string) {
+    console.log('Eliminando producto con id:', id);
+    
+    carritoCompras.value = carritoCompras.value.filter((producto: any) => producto.id !== id);
+    
+    localStorage.setItem('carritoCompras', JSON.stringify(carritoCompras.value));
 
-function guardarProductoEnFavoritos(producto: any) {
-    const productoExistente = carritoCompras.value.find((item: any) => item.id === producto.id);
-    if (productoExistente) {
-        window.alert('Este producto ya está en tus favoritos.');
-        return;
-    }
-
-    carritoCompras.value = [...carritoCompras.value, producto];
-    localStorage.setItem('guardarProductos', JSON.stringify(carritoCompras.value));
-
-    console.log('Productos guardados en localStorage:', localStorage.getItem('guardarProductos')); 
-    window.alert('Producto agregado a carrito de compras.');
+    window.alert('Producto eliminado del carrito.');
+    console.log('Productos actualizados:', carritoCompras.value);
 }
 
 
 </script>
 
 <template>
-  <div id="app">
+  <div id="app" class="app_carrito">
     <div class="page-wrapper">
       <div class="">
         
@@ -53,7 +46,7 @@ function guardarProductoEnFavoritos(producto: any) {
         <main class="main-carrito">
           <div class="button-container">
             <button class="expand-button">
-              <img src="../../public/back-white.png" alt="" @click="router.go(-1)"/>
+              <img src="../../public/back-white.png" alt="" @click="router.go(-1)" class="button-back"/>
             </button>
           </div>
 
@@ -65,6 +58,7 @@ function guardarProductoEnFavoritos(producto: any) {
           No tienes productos agregados.
         </div>
         <div v-else class="products-container">
+          <!-- <pre> {{ carritoCompras }}</pre> -->
           <div 
             class="product-card" 
             v-for="producto in carritoCompras" 
@@ -74,13 +68,25 @@ function guardarProductoEnFavoritos(producto: any) {
             <div class="image-container">
               <img :src="producto.image" class="card-img-top" :alt="producto.name" />
             </div>
-            <div class="card-body">
+            <div class="card_body">
               <h1 class="product-name">{{ producto.name }}</h1>
               <h3 class="product-amount">{{ producto.amount }} {{ producto.unit }}</h3>
               <h2 class="product-price">Precio: {{ producto.price }}</h2>
+              <div class="icono-update">
+                <img
+                  src="../../../public/trash-color.png"
+                  alt="trash"
+                  @click="eliminarDeCarritoCompras(producto.id)"
+                  style="cursor: pointer"
+                />
+              </div>
             </div>
           </div>
         </div>
+
+        <button class="vaciar_carrito">
+          Vaciar Carrito
+        </button>
 
           <BuscadorSubVista/>
         </main>
